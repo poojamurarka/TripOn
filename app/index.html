@@ -1,5 +1,20 @@
 ﻿<!DOCTYPE html>
 <html>
+<style>
+    .chat_breakword{
+        word-wrap: break-word;
+        word-break:break-word;
+        white-space:pre-wrap;
+    }
+    .btn-minimize {
+        width: 50px;
+        height: 50px;
+        background-color: #F00;
+    }
+    .btn-minimize.btn-plus {
+        background-color: #0F0;
+    }
+</style>
 <head>
     <meta charset="utf-8" />
     <title>MEAN Stack User Registration and Login Example Application</title>
@@ -13,6 +28,7 @@
         <ul class="nav nav-tabs">
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>
+            <li ng-class="{active: activeTab === 'chat'}"><a ui-sref="chat">chat</a></li>
             <li><a href="/login" target="_self">Logout</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
@@ -27,6 +43,7 @@
     <footer></footer>
 
     <!-- external scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
@@ -35,7 +52,9 @@
     <script src="app.js"></script>
     <script src="app-services/user.service.js"></script>
     <script src="app-services/flash.service.js"></script>
+    <script src="app-services/chat.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
+    <script src="chat/index.controller.js"></script>
 </body>
 </html>

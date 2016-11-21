@@ -24,7 +24,14 @@
                 controller: 'Account.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
-            });
+            })
+        .state('chat', {
+            url: '/chat',
+            templateUrl: 'chat/index.html',
+            controller: 'Chat.IndexController',
+            controllerAs: 'vm',
+            data: { activeTab: 'chat' }
+        });
     }
 
     function run($http, $rootScope, $window) {

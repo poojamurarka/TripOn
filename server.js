@@ -5,12 +5,38 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
+//var mongo = require('mongoskin');
+//var db = mongo.db(config.connectionString, { native_parser: true });
 
+var mongoose = require('mongoose');
+var chatMessage;
+var db = mongoose.connection;
+
+db.on('error', console.error);
+db.once('open', function() {
+    var chatSchema = new mongoose.Schema({
+        username: { type: String }
+        , message: String
+    });
+
+// Compile a 'Movie' model using the movieSchema as the structure.
+// Mongoose also creates a MongoDB collection called 'Movies' for these documents.
+    chatMessage = mongoose.model('chat', chatSchema);
+});
+
+mongoose.connect('mongodb://localhost:27017/TripOn');
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var path = require('path');
+
+//require('./app/chat')(io);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // use JWT auth to secure the api
 app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
@@ -28,6 +54,35 @@ app.get('/', function (req, res) {
 });
 
 // start server
-var server = app.listen(3000, function () {
+/*var server = app.listen(3000, function () {
+ console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
+ });
+ */
+
+var server = http.listen(3000, function(){
     console.log('Server listening at http://' + server.address().address + ':' + server.address().port);
+
+});
+var fisrtTimeConnection = true;
+io.on('connection', function(socket){
+    socket.on('chat message', function(data){
+        console.log("server chat message");
+        io.emit('chat message', data);
+        var chat = new chatMessage({
+            username:  data.name
+            , message: data.msg
+        });
+
+        chat.save(function(err, thor) {
+            if (err) return console.error(err);
+            console.dir(thor);
+        });
+    });
+
+    socket.on('get All Chat', function(){
+        chatMessage.find(function (err, chats) {
+            if (err) return console.error(err);
+            io.emit('get All Chat', chats);
+        });
+    });
 });
