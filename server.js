@@ -64,9 +64,10 @@ var server = http.listen(3000, function(){
 
 });
 var fisrtTimeConnection = true;
+var listOfOnlinePeople = [];
 io.on('connection', function(socket){
+    //console.log("nsd : " +socket.id);
     socket.on('chat message', function(data){
-        console.log("server chat message");
         io.emit('chat message', data);
         var chat = new chatMessage({
             username:  data.name
@@ -75,7 +76,6 @@ io.on('connection', function(socket){
 
         chat.save(function(err, thor) {
             if (err) return console.error(err);
-            console.dir(thor);
         });
     });
 
@@ -84,5 +84,27 @@ io.on('connection', function(socket){
             if (err) return console.error(err);
             io.emit('get All Chat', chats);
         });
+    });
+
+    socket.on("typing", function(data) {
+            io.emit("isTyping", data);
+    });
+    socket.on("disconnect", function() {
+        console.log(socket.id + ' disconnected');
+        var id = socket.id;
+        for(var i = 0; i < listOfOnlinePeople.length; i++) {
+            if(listOfOnlinePeople[i].socketId == id) {
+                listOfOnlinePeople.splice(i, 1);
+                io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
+                break;
+            }
+        }
+        console.log(listOfOnlinePeople);
+    });
+    socket.on("joinserver", function(data) {
+        //console.log('disconnect');
+        console.log(socket.id + " : "+data.uname);
+        listOfOnlinePeople.push({"socketId" : socket.id ,"username" : data.uname});
+        io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
     });
 });
