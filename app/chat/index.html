@@ -1,29 +1,16 @@
-﻿<!-- The chat view -->
-<section class="container">
-    <div class="page-header">
-        <h1>Chat Example</h1>
+﻿<form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="vm.sendMessage();" autocomplete="off">
+    <div id="onlinePeople">
+
+        <div class="btn-minimize" ng-click="vm.createRoom(22)"  title="Close">22</div>
     </div>
-    <!-- The message form -->
-    <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="vm.sendMessage();">
-        <fieldset class="row">
-            <div class="input-group">
-                <input type="text" id="messageText" name="messageText" class="form-control" ng-model="vm.messageText" placeholder="Enter new message" autofocus>
-                <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-disabled="!vm.messageText.length">Submit</button>
-        </span>
-            </div>
-        </fieldset>
-    </form>
-    <ul class="list-unstyled">
-        <!-- List all messages -->
-        <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in vm.messages">
-            <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
-            <img ng-src="/{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
-            <div class="pull-left chat-message-details">
-                <strong ng-bind="message.username"></strong>
-                <br>
-                <span ng-bind="message.text"></span>
-            </div>
-        </li>
-    </ul>
-</section>
+<div id="TripOn1_WP" style="visibility: hidden; position: fixed; display: block; z-index: 2147483645; overflow: hidden; margin: 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border: none; list-style: none; outline: none; width: 438px; height: 448px; right: 0px; top: 0px;" class="">
+    <div id="TripOn1_P" style="position: fixed; right: 5px; bottom: {{vm.marginBottom}}px; margin: 0px; padding: 0px; border: none; text-align: left; z-index: 1; overflow: hidden; background-color: transparent; width: 438px; height: 448px; display: block;">
+        <div style="left: 0; top: 0; z-index: 1;"><img src="https://storage.googleapis.com/code.snapengage.com/wbg/transferwise_new_chat_form.png" style=";position:absolute;display:block;margin:0;padding:0;border:none;float:none;clear:none;left:0px;top:0px;width:438px;max-width:438px;min-width:438px;height:448px;max-height:448px;min-height:448px;z-index:2;background-color:transparent;background:none;font-style:normal;font-weight:normal;font-size:100%;line-height:normal;text-shadow:none;list-style:none;text-align:left;outline:none;text-indent:0px;-moz-box-shadow:none;-webkit-box-shadow:none;" draggable="false" galleryimg="no" width="438" height="448"></div>
+        <div id="TripOn1_CL" style=";position:absolute;display:block;margin:0;padding:0;border:none;float:none;clear:none;left:32px;top:88px;width:366px;max-width:366px;min-width:366px;height:241px;max-height:241px;min-height:241px;z-index:2;background-color:transparent;background:none;font-style:normal;font-weight:normal;font-size:100%;line-height:normal;text-shadow:none;list-style:none;text-align:left;outline:none;text-indent:0px;-moz-box-shadow:none;-webkit-box-shadow:none;font-family:  Avenir W02,Avenir,Arial, sans-serif; background: none; font-size: 12px; font-weight: normal; color:#000000;overflow: auto; margin-left:7px;">
+        </div>
+        <input id="TripOn1_CE" ng-model="TripOn1_CE" type="text"  placeholder="Send Message"  style=";position:absolute;display:block;margin:0;padding:0;border:none;float:none;clear:none;left:36px;top:356px;width:369px;max-width:369px;min-width:369px;height:68px;max-height:68px;min-height:68px;z-index:2;background-color:transparent;background:none;font-style:normal;font-weight:normal;font-size:100%;line-height:normal;text-shadow:none;list-style:none;text-align:left;outline:none;text-indent:0px;-moz-box-shadow:none;-webkit-box-shadow:none;font-family:  Avenir W02,Avenir,Arial, sans-serif; font-size: 12px; font-weight: normal; color:#000000;vertical-align: top; resize: none; background-image: url('https://storage.googleapis.com/code.snapengage.com/wbg/blank.gif'); background-repeat: repeat; overflow: auto;" type="text" name="chat">
+        <div class="btn-minimize" ng-click="vm.closeChat()" style=";position:absolute;display:block;margin:0;padding:0;border:none;float:none;clear:none;left:388px;top:31px;width:30px;max-width:30px;min-width:30px;height:30px;max-height:30px;min-height:30px;z-index:2;background-color:transparent;background:none;font-style:normal;font-weight:normal;font-size:100%;line-height:normal;text-shadow:none;list-style:none;text-align:left;outline:none;text-indent:0px;-moz-box-shadow:none;-webkit-box-shadow:none;cursor:pointer;" title="Close"></div>
+    </div>
+</div>
+ </form>
+

@@ -90,6 +90,7 @@ io.on('connection', function(socket){
             io.emit("isTyping", data);
     });
     socket.on("disconnect", function() {
+        socket.leave(socket.room);
         console.log(socket.id + ' disconnected');
         var id = socket.id;
         for(var i = 0; i < listOfOnlinePeople.length; i++) {
@@ -99,12 +100,45 @@ io.on('connection', function(socket){
                 break;
             }
         }
-        console.log(listOfOnlinePeople);
     });
     socket.on("joinserver", function(data) {
         //console.log('disconnect');
         console.log(socket.id + " : "+data.uname);
-        listOfOnlinePeople.push({"socketId" : socket.id ,"username" : data.uname});
+       // if(!data.isVisited) {
+            listOfOnlinePeople.push({"socketId": socket.id, "username": data.uname});
+       // }
         io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
     });
+
+    socket.on('subscribe', function(data) {
+        console.log('joining room', data.roomId);
+        socket.room = data.roomId;
+        socket.join(data.roomId);
+        //rooms.push({"roomName" : data.roomId,"socketId": socket.id});
+        var socketId;
+        for(var i = 0; i < listOfOnlinePeople.length; i++) {
+            if(listOfOnlinePeople[i].username == data.toUser) {
+                socketId = listOfOnlinePeople[i].socketId;
+                io.sockets.connected[socketId].emit('join room to chat', {"roomName" : data.roomId ,"fromUser" : data.name});
+                //rooms.push({"roomName" : data.roomId,"socketId": socketId});
+                break;
+            }
+        }
+
+    });
+    socket.on('add me in room', function(data) {
+        socket.room = data.roomName;
+        console.log("adding toUser");
+        socket.join(data.roomName);
+    });
+    socket.on('send private message', function(data) {
+        var roomId  = data.room;
+        console.log("room found");
+        io.to(roomId).emit('conversation private post', {
+            "message": data.message,
+            "fromUser": data.name,
+            "toUser": data.toUser
+        });
+    });
+
 });

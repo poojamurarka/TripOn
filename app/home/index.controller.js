@@ -8,11 +8,14 @@
     var typing = false;
     function Controller(UserService,ChatService,$scope) {
         var vm = this;
+        vm.showChat = false;
         vm.allChat = null;
         vm.user = null;
         vm.messageText = null;
+        vm.marginBottom = -375;
         vm.sendMessage = sendMessage;
         vm.updateTyping  = updateTyping;
+        vm.toggleChatVisibility = toggleChatVisibility;
         var userPushed = false;
         var lastTypingTime;
         var TYPING_TIMER_LENGTH = 400;
@@ -23,17 +26,26 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
-                if(!isVisited) {
+               /* if(!isVisited) {
                     socket.emit("joinserver",{"uname" : vm.user.username});
                     isVisited = true;
                 }
-                socket.emit('get All Chat', {});
+*/                socket.emit('get All Chat', {});
             });
 
 
           /*  ChatService.GetAllChat().then(function (data) {
                 console.log(data)
             });*/
+        }
+
+
+        function toggleChatVisibility(){
+           if(vm.marginBottom == 0){
+             vm.marginBottom = -375;
+           }else{
+             vm.marginBottom = 0;
+           }
         }
 
 
@@ -99,14 +111,14 @@
                 +' : </span>'+ data.msg+' </div>'
             +'<div style="height:7px;"></div>');
         });
-        socket.on('getOnlinePeople', function(data){
+/*        socket.on('getOnlinePeople', function(data){
             var lstOfOnline = data.listOfOnlinePeople;
             for(var i in lstOfOnline){
                 if(vm.user.username != lstOfOnline[i].username) {
                     console.log(i + "   usersonline " + lstOfOnline[i].username);
                 }
             }
-        });
+        });*/
 
     }
 

@@ -31,7 +31,11 @@
             controller: 'Chat.IndexController',
             controllerAs: 'vm',
             data: { activeTab: 'chat' }
-        });
+        })
+            .state('logout', {
+                controller: 'Logout.IndexController',
+                controllerAs: 'vm'
+            });
     }
 
     function run($http, $rootScope, $window) {

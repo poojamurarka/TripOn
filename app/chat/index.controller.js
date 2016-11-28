@@ -4,37 +4,99 @@
     angular
         .module('app')
         .controller('Chat.IndexController', ChatController);
-
-    ChatController.$inject = ['Socket'];
-
-    function ChatController(Socket) {
+    var isVisited = false;
+    var roomName;
+    var toUser;
+    function ChatController(UserService) {
         var vm = this;
-
-        vm.messages = [];
-        vm.messageText = '';
+        vm.user = null;
+        vm.privateChat = privateChat;
+        vm.createRoom = createRoom;
         vm.sendMessage = sendMessage;
+        vm.closeChat = closeChat;
+        //vm.visibility = "hidden";
+        var socket =  io();
+        initController();
+        function initController() {
+            // get current user
+            UserService.GetCurrent().then(function (user) {
+                console.log(isVisited);
+                vm.user = user;
+                socket.emit("joinserver", {"uname": vm.user.username,"isVisited" : isVisited});
+                isVisited = true;
+            });
 
-        init();
+        }
+        socket.on('getOnlinePeople', function(data){
+            //$('#onlinePeople').empty();
+            var lstOfOnline = data.listOfOnlinePeople;
+            for(var i in lstOfOnline){
+                if(vm.user.username != lstOfOnline[i].username) {
+                    /*$('#onlinePeople').append('<button type="submit" id='+lstOfOnline[i].username+' ng-click="vm.createRoom('+lstOfOnline[i].username+')" >' +
+                        lstOfOnline[i].username.toUpperCase() +
+                        '</button>');
 
-        function init() {
-            // Add an event listener to the 'chatMessage' event
-            Socket.on('chatMessage', function (message) {
-                vm.messages.unshift(message);
+                    $('#onlinePeople').append('<div class="btn-minimize" ng-click="vm.createRoom()"  title="Close">hello</div>');
+                    /*$('#onlinePeople').append('<div onclick="vm.createRoom('+lstOfOnline[i].username+')" >'+
+                        lstOfOnline[i].username.toUpperCase() +
+                    '</div>');
+                    console.log(i + "   usersonline " + lstOfOnline[i].username);*/
+
+                }
+            }
+        });
+        function createRoom(user) {
+            //vm.visibility = "visible";
+            $('#TripOn1_WP').css("visibility", "visible");
+            roomName = vm.user.username+":"+user;
+            toUser = user;
+            socket.emit('subscribe', {"roomId" : roomName ,"toUser" : toUser });
+            $('#TripOn1_CL').empty();
+
+        }
+        function privateChat() {
+            var message;
+            var convertionId;
+            socket.emit('send private message', {
+                room: convertionId,
+                message: message
             });
         }
 
-        // Create a controller method for sending messages
-        function sendMessage() {
-            // Create a new message object
-            var message = {
-                text: vm.messageText
-            };
+        socket.on('conversation private post', function(data) {
+            var username = data.fromUser;
+            if(username == vm.user.username){
+                username = 'Me';
+            }
+            $('#TripOn1_CL').append('<div class="chat_breakword" style="clear:left;line-height:normal;color:black;">' +
+                '<span style="color:#000000;font-weight:bold;"> '+ username
+                +' : </span>'+ data.message +' </div>'
+                +'<div style="height:7px;"></div>');
+        });
+        socket.on('userOffline', function(data) {
+            console.log(data.message);
+            $('#TripOn1_CL').append('<div class="chat_breakword" style="clear:left;line-height:normal;color:black;">' +
+                '<span style="color:#000000;font-weight:normal;"> User '+ data.toUser
+                +'</span> is offline.. Try to message him/her after sometime..</div>'
+                +'<div style="height:7px;"></div>');
+        });
+        socket.on('join room to chat', function(data) {
+            roomName = data.roomName;
+            //vm.visibility = "visible";
+            $('#TripOn1_WP').css("visibility", "visible");
+            $('#TripOn1_CL').empty();
+            socket.emit('add me in room',data);
+        });
 
-            // Emit a 'chatMessage' message event
-            Socket.emit('chatMessage', message);
 
-            // Clear the message text
-            vm.messageText = '';
+        function sendMessage(){
+            socket.emit('send private message', {"toUser" : toUser,"room" : roomName,"message" : $('#TripOn1_CE').val(),"name" : vm.user.username});
+            $('#TripOn1_CE').val('');
+        }
+
+        function closeChat(){
+            //vm.visibility = "hidden";
+            $('#TripOn1_WP').css("visibility", "hidden");
         }
     }
 }());
