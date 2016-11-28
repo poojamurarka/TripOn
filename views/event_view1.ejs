@@ -1,0 +1,97 @@
+<html>
+<body>
+<head>
+
+    <link rel="stylesheet" href="/css/etalage.css">
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src="/js/jquery-1.11.1.min.js"></script>
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+
+    <script src="/js/jquery.etalage.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 400,
+                source_image_width: 900,
+                source_image_height: 1200,
+                show_hint: true,
+                click_callback: function(image_anchor, instance_id){
+                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                }
+            });
+
+        });
+    </script>
+
+    <title>Event More Detail</title>
+
+</head>
+
+<div class="single-sec">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/home"> Home</a></li>
+            <li class="active">Event Detail</li>
+
+        </ol>
+
+
+        <div class="col-md-9 det">
+            <div class="single_left">
+                <div class="grid images_3_of_2">
+
+                    <ul id="etalage">
+
+
+
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event1.1.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event1.1.jpg" class="img-responsive" title=""   />
+
+                        </li>
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event1.1.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event1.1.jpg" class="img-responsive" title=""   />
+
+                        </li>
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event1.1.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event1.1.jpg" class="img-responsive" title=""   />
+
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+
+
+
+            <div class="single-right">
+                <img src="/images/event1.1.jpg"  style="width:100px;height:100px" >	<br /><br />
+
+                <div class="sofaset-info">
+                    <h4 style="font-size:30px">Details For  </h4>
+                    <ul style="font-size:24px">
+                        <li>Come and celebrate with us the 133st Kieler Woche, experience the maritime atmosphere of KIEL.SAILING CITY. 5000 yachtsmen and women, 50 countries, 2000 yachts, dinghys and surfboards, almost 40 sailing events, more than 400 planned regatta starts on eleven race courses. The "Who's who" of sailing will be lining up at the start in KIEL.Experience the regatta events with live commentary aboard the official Kieler Woche Boat.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="sofaset-info">
+                    <h4 style="font-size:30px">Importatnt Links For  </h4>
+                http://www.kieler-woche.de/
+            </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>

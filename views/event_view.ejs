@@ -1,0 +1,98 @@
+<html>
+<body>
+<head>
+
+    <link rel="stylesheet" href="/css/etalage.css">
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src="/js/jquery-1.11.1.min.js"></script>
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+
+    <script src="/js/jquery.etalage.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 400,
+                source_image_width: 900,
+                source_image_height: 1200,
+                show_hint: true,
+                click_callback: function(image_anchor, instance_id){
+                    alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+                }
+            });
+
+        });
+    </script>
+
+    <title>Event More Detail</title>
+
+</head>
+
+<div class="single-sec">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/home"> Home</a></li>
+            <li class="active">Event Detail</li>
+
+        </ol>
+
+
+        <div class="col-md-9 det">
+            <div class="single_left">
+                <div class="grid images_3_of_2">
+
+                    <ul id="etalage">
+
+
+
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event0.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event0.jpg" class="img-responsive" title=""   />
+
+                        </li>
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event0.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event0.jpg" class="img-responsive" title=""   />
+
+                        </li>
+                        <li>
+
+                            <img class="etalage_thumb_image" src="/images/event0.jpg" class="img-responsive"   />
+                            <img class="etalage_source_image" src="/images/event0.jpg" class="img-responsive" title=""   />
+
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+
+            <div class="single-right">
+                <img src="/images/event0.jpg"  style="width:100px;height:100px" >	<br /><br />
+
+                <div class="sofaset-info">
+                    <h4 style="font-size:30px">Details For  </h4>
+                    <ul  id="detailOfActivity" style="font-size:24px">
+                        <li>The maritime atmosphere is reflected in a view of the Kiel line and the Port of Kiel to the many sailboats, ferries and freighters in the Kiel Fjord. Due to the natural seawater harbor the imposing offshore ferries and cruise ships can be seen directly in the city.<li style="margin-left:0px;">Step into our comfortable sightseeing buses and let the informative and live audio commentary provide you information about Kiel's history.</li></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sofaset-info">
+                <h4 style="font-size:30px">Importatnt Links For  </h4>
+                http://www.city-sightseeing.com/tour-details/germany/
+                <ul style="font-size:24px">
+
+                    <!--<a href="mailto:info@example.com ">-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
