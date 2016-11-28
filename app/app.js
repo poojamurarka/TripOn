@@ -25,16 +25,24 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'account' }
             })
-        .state('chat', {
-            url: '/chat',
-            templateUrl: 'chat/index.html',
-            controller: 'Chat.IndexController',
-            controllerAs: 'vm',
-            data: { activeTab: 'chat' }
-        })
+            .state('PublicChat', {
+                url: '/PublicChat',
+                templateUrl: 'PublicChat/index.html',
+                controller: 'PublicChat.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'PublicChat' }
+            })
+            .state('chat', {
+                url: '/chat',
+                templateUrl: 'chat/index.html',
+                controller: 'Chat.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'chat' }
+            })
             .state('logout', {
                 controller: 'Logout.IndexController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                data: { activeTab: 'home' }
             });
     }
 

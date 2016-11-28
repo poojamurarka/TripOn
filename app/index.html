@@ -27,8 +27,9 @@
     <header>
         <ul class="nav nav-tabs">
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
-           <!-- <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Account</a></li>-->
-            <li ng-class="{active: activeTab === 'chat'}"><a ui-sref="chat">chat</a></li>
+            <li ng-class="{active: activeTab === 'PublicChat'}"><a ui-sref="PublicChat">Public Chat</a></li>
+            <li ng-class="{active: activeTab === 'chat'}"><a ui-sref="chat">Private chat</a></li>
+            <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Settings</a></li>
             <li ng-class="{active: activeTab === 'logout'}"><a href="/login" target="_self">Logout</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
@@ -55,6 +56,7 @@
     <script src="app-services/chat.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
+    <script src="PublicChat/index.controller.js"></script>
     <script src="chat/index.controller.js"></script>
 </body>
 </html>
