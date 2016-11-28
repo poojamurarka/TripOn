@@ -75,6 +75,7 @@
                         'style="line-height:normal;color:black;visibility:visible;">'+data.username+
                         '<img src="https://www.snapengage.com/img/typing.gif" alt="[...]" width="24" height="8">'+
                         '</div>');
+                    scrollToBottomChat();
                 }
             } else {
                 $('#TripOn_CL #TripOn_Typing').remove();
@@ -99,6 +100,7 @@
                     +' : </span>'+ data[i].message+' </div>'
                     +'<div style="height:7px;"></div>');
             }
+            scrollToBottomChat();
         });
         socket.on('chat message', function(data){
             // insertChat(data.name,data.msg);
@@ -110,15 +112,13 @@
                 '<span style="color:#000000;font-weight:bold;">' + username
                 +' : </span>'+ data.msg+' </div>'
                 +'<div style="height:7px;"></div>');
+
+            scrollToBottomChat();
         });
-        /*        socket.on('getOnlinePeople', function(data){
-         var lstOfOnline = data.listOfOnlinePeople;
-         for(var i in lstOfOnline){
-         if(vm.user.username != lstOfOnline[i].username) {
-         console.log(i + "   usersonline " + lstOfOnline[i].username);
-         }
-         }
-         });*/
+        function scrollToBottomChat(){
+            var objDiv = $("#TripOn_CL");
+            objDiv[0].scrollTop = objDiv[0].scrollHeight;
+        }
 
     }
 

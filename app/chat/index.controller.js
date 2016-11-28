@@ -12,8 +12,10 @@
         vm.user = null;
         vm.privateChat = privateChat;
         vm.createRoom = createRoom;
+        vm.getListOfOnlineUsers = getListOfOnlineUsers;
         vm.sendMessage = sendMessage;
         vm.closeChat = closeChat;
+        vm.listOfOnlineUsers = [];
         //vm.visibility = "hidden";
         var socket =  io();
         initController();
@@ -27,11 +29,16 @@
             });
 
         }
+        function getListOfOnlineUsers(){
+
+        }
         socket.on('getOnlinePeople', function(data){
             //$('#onlinePeople').empty();
             var lstOfOnline = data.listOfOnlinePeople;
+            vm.listOfOnlineUsers = [];
             for(var i in lstOfOnline){
                 if(vm.user.username != lstOfOnline[i].username) {
+                    vm.listOfOnlineUsers.push(lstOfOnline[i]);
                     /*$('#onlinePeople').append('<button type="submit" id='+lstOfOnline[i].username+' ng-click="vm.createRoom('+lstOfOnline[i].username+')" >' +
                         lstOfOnline[i].username.toUpperCase() +
                         '</button>');
@@ -72,6 +79,7 @@
                 '<span style="color:#000000;font-weight:bold;"> '+ username
                 +' : </span>'+ data.message +' </div>'
                 +'<div style="height:7px;"></div>');
+            scrollToBottomChat();
         });
         socket.on('userOffline', function(data) {
             console.log(data.message);
@@ -92,11 +100,16 @@
         function sendMessage(){
             socket.emit('send private message', {"toUser" : toUser,"room" : roomName,"message" : $('#TripOn1_CE').val(),"name" : vm.user.username});
             $('#TripOn1_CE').val('');
+
         }
 
         function closeChat(){
             //vm.visibility = "hidden";
             $('#TripOn1_WP').css("visibility", "hidden");
+        }
+        function scrollToBottomChat(){
+            var objDiv = $("#TripOn1_CL");
+            objDiv[0].scrollTop = objDiv[0].scrollHeight;
         }
     }
 }());
