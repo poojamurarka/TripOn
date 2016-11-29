@@ -6,4 +6,9 @@ var config = require('config.json');
 router.get('/', function (req, res) {
     res.render('home');
 });
+
+router.get('/home', function (req, res) {
+    res.render('home');
+});
 module.exports = router;
+
