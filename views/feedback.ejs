@@ -1,23 +1,31 @@
 <html>
 <body>
-<body background="C:\Users\DELL\Desktop\logos\germany1.jpg">
-<style>
-    body {
-        background-color:cyan;
-    }
-</style>
-
-<h2><center>!!...WE APPRICIATE YOUR VALUABLE FEEDBACK...!!!</center></h2>
-
-<form action="mailto:someone@example.com" method="post" enctype="text/plain">
-    Name:<br>
-    <input type="text" name="name"><br>
-    E-mail:<br>
-    <input type="text" name="mail"><br>
-    Comment:<br>
-    <input type="text" name="comment" size="100"><br><br>
-    <input type="submit" value="Send">
-    <input type="reset" value="Reset">
-</form>
-
+<head>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+<div class="contact">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/home"> Home</a></li>
+            <li class="active">Feedback</li>
+        </ol>
+        <div class="contact-head">
+            <h2>Feedback us </h2><h4 style="font-size:18px;color:#009">With your valuable suggestions...</h4>
+        </div>
+        <div class="col-md-6 has-feedback">
+            <br/><br/>
+            <input type="text" placeholder="Name" name="name" id="name" /><br /><span class="help-inline" id="msgname" style="color:#F00;"></span>
+            <input type="text" placeholder="E-mail" name="email" id="email" /><br /><span class="help-inline" id="msgemail" style="color:#F00;position:absolute"></span>
+            <input type="text" placeholder="Phone" name="phone" id="phone" /><br /><span class="help-inline" id="msgphone" style="color:#F00;position:absolute"></span>
+        </div>
+        <div class="col-md-6 contact-right">
+            <br /><br />
+            <textarea placeholder="Type Your Question Or Message Here..." name="message" id="message"></textarea>
+            <input type="submit" value="SEND" name="feedback" id="feedback"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</head>
 </body>
+</html>
