@@ -18,8 +18,9 @@
         }
 
         function takePlaceName(){
-            console.log($('#placename').val());
-            socket.emit("Get Data",$('#placename').val());
+            //console.log($('#placename').val());
+            //socket.emit("Get Data",$('#placename').val());
+			socket.emit("Get Data",{});
         }
 
         socket.on('Send Database Information', function(data) {

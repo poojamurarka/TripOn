@@ -10,18 +10,43 @@ var config = require('config.json');
 
 var mongoose = require('mongoose');
 var chatMessage;
+var hotelList;
+var restaurantsList;
 var db = mongoose.connection;
 
 db.on('error', console.error);
 db.once('open', function() {
+    var hotelSchema = new mongoose.Schema({
+        Name : { type: String },
+        Location : { type: String }/*,
+         Address: { type: String },
+         Description : { type: String },
+         Rating : { type: String },
+         pricePerDay : { type: String }*/
+    });
     var chatSchema = new mongoose.Schema({
         username: { type: String }
         , message: String
     });
 
-// Compile a 'Movie' model using the movieSchema as the structure.
-// Mongoose also creates a MongoDB collection called 'Movies' for these documents.
+
+
+    var restaurantSchema = new mongoose.Schema({
+        Name : String,
+        Location : String,
+        Address: String,
+        Description : String,
+        Timings : String,
+        Contact : String,
+        Menu : String
+    });
+
+// Compile a 'chat' model using the chatSchema as the structure.
+// Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
+    hotelList = mongoose.model('hotel', hotelSchema);
+    restaurantsList = mongoose.model('Restaurant', restaurantSchema);
+
 });
 
 mongoose.connect('mongodb://localhost:27017/TripOn');
@@ -73,6 +98,25 @@ var fisrtTimeConnection = true;
 var listOfOnlinePeople = [];
 io.on('connection', function(socket){
     //console.log("nsd : " +socket.id);
+    var data = [];
+    socket.on('Get Data', function(placename){
+        console.log(placename);
+        hotelList.find(function (err, hotel) {
+            if (err) return console.error(err);
+            //io.emit('get All Chat', chats);
+            data.push({"hotels" : hotel});
+            io.emit('Send Database Information', data);
+        });
+
+        restaurantsList.find({ Location: placename },function (err, Restaurant) {
+            if (err) return console.error(err);
+            //io.emit('get All Chat', chats);
+            data.push({"restaurants" : Restaurant});
+        });
+
+
+
+    });
     socket.on('chat message', function(data){
         io.emit('chat message', data);
         var chat = new chatMessage({
@@ -93,7 +137,7 @@ io.on('connection', function(socket){
     });
 
     socket.on("typing", function(data) {
-            io.emit("isTyping", data);
+        io.emit("isTyping", data);
     });
     socket.on("disconnect", function() {
         socket.leave(socket.room);
@@ -110,9 +154,9 @@ io.on('connection', function(socket){
     socket.on("joinserver", function(data) {
         //console.log('disconnect');
         console.log(socket.id + " : "+data.uname);
-       // if(!data.isVisited) {
-            listOfOnlinePeople.push({"socketId": socket.id, "username": data.uname});
-       // }
+        // if(!data.isVisited) {
+        listOfOnlinePeople.push({"socketId": socket.id, "username": data.uname});
+        // }
         io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
     });
 

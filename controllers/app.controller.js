@@ -14,6 +14,13 @@ router.use('/', function (req, res, next) {
     }
 
 });
+
+
+
+// Serve Static files from public
+router.use('/', express.static('public'));
+
+
 // make JWT token available to angular app
 router.get('/token', function (req, res) {
     res.send(req.session.token);
