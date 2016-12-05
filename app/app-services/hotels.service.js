@@ -9,11 +9,16 @@
         var service = {};
 
         service.GetHotels = GetHotels;
+        service.CreateHotel = CreateHotel;
 
         return service;
 
         function GetHotels() {
             return $http.get('/hotels').then(handleSuccess, handleError);
+        }
+
+        function CreateHotel(hotel) {
+            return $http.post('/hotels', hotel).then(handleSuccess, handleError);
         }
 
         function handleSuccess(res) {

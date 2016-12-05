@@ -18,6 +18,10 @@
             HotelService.GetHotels().then(function (data) {
                 console.log(data)
             });
+            /*HotelService.CreateHotel([]).then(function (data) {
+                console.log(data)
+            });*/
+
         }
 
        /* function takePlaceName(){

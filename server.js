@@ -22,19 +22,13 @@ db.once('open', function() {
         , message: String
     });
    var hotelSchema = new mongoose.Schema({
-       Name: String
-       //, Location: {type: String}
+       Name: String,
+       Location: {type: String},
+        Address: { type: String },
+        Description : { type: String },
+        Rating : { type: String },
+        pricePerDay : { type: String }
    });
-       /*,
-         Address: { type: String },
-         Description : { type: String },
-         Rating : { type: String },
-         pricePerDay : { type: String }
-    });
-
-
-
-
     var restaurantSchema = new mongoose.Schema({
         Name : String,
         Location : String,
@@ -44,12 +38,12 @@ db.once('open', function() {
         Contact : String,
         Menu : String
     });
-*/
+
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
     hotelList = mongoose.model('hotel', hotelSchema);
-    //restaurantsList = mongoose.model('Restaurant', restaurantSchema);
+    restaurantsList = mongoose.model('Restaurant', restaurantSchema);
 
 });
 
@@ -93,8 +87,24 @@ app.get('/hotels', function (req, res) {
     hotelList.find(function (err, hotels) {
         if (err) return console.error(err);
         console.log(hotels);
+        res.data = hotels;
     });
 });
+
+app.post('/hotels', function (req, res) {
+    var hotel = new hotelList({
+        Name:  req.Name,
+        Location: req.Location,
+        Address: req.Address,
+        Description : req.Description,
+        Rating : req.Rating,
+        pricePerDay : req.pricePerDay
+    });
+    hotel.save(function(err, thor) {
+        if (err) return console.error(err);
+    });
+});
+
 
 // start server
 /*var server = app.listen(3000, function () {
@@ -109,26 +119,6 @@ var server = http.listen(3000, function(){
 var fisrtTimeConnection = true;
 var listOfOnlinePeople = [];
 io.on('connection', function(socket){
-    //console.log("nsd : " +socket.id);
-    /*var data = [];
-    socket.on('Get Data', function(placename){
-        console.log(placename);
-        hotelList.find(function (err, hotel) {
-            if (err) return console.error(err);
-            //io.emit('get All Chat', chats);
-            data.push({"hotels" : hotel});
-            io.emit('Send Database Information', data);
-        });
-
-        restaurantsList.find({ Location: placename },function (err, Restaurant) {
-            if (err) return console.error(err);
-            //io.emit('get All Chat', chats);
-            data.push({"restaurants" : Restaurant});
-        });
-
-
-
-    });*/
     socket.on('chat message', function(data){
         io.emit('chat message', data);
         var chat = new chatMessage({
