@@ -7,7 +7,7 @@
     function Controller(UserService,HotelService,$scope) {
         var vm = this;
         vm.user = null;
-        //vm.takePlaceName = takePlaceName;
+        vm.listOfHotels = [];
         var socket =  io();
         initController();
         function initController() {
@@ -16,7 +16,8 @@
                 vm.user = user;
             });
             HotelService.GetHotels().then(function (data) {
-                console.log(data)
+                vm.listOfHotels = data;
+                console.log(vm.listOfHotels);
             });
             /*HotelService.CreateHotel([]).then(function (data) {
                 console.log(data)

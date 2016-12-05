@@ -42,7 +42,7 @@ db.once('open', function() {
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
-    hotelList = mongoose.model('hotel', hotelSchema);
+    hotelList = mongoose.model('hotels', hotelSchema);
     restaurantsList = mongoose.model('Restaurant', restaurantSchema);
 
 });
@@ -84,11 +84,18 @@ app.get('/', function (req, res) {
 
 // make '/app' default route
 app.get('/hotels', function (req, res) {
-    hotelList.find(function (err, hotels) {
-        if (err) return console.error(err);
-        console.log(hotels);
-        res.data = hotels;
-    });
+    hotelList.find()
+        .then(function (hotels) {
+            if (hotels) {
+                res.send(hotels);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+                res.status(400).send(err);
+        });
+
 });
 
 app.post('/hotels', function (req, res) {
