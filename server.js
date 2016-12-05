@@ -16,18 +16,22 @@ var db = mongoose.connection;
 
 db.on('error', console.error);
 db.once('open', function() {
-    var hotelSchema = new mongoose.Schema({
-        Name : { type: String },
-        Location : { type: String }/*,
-         Address: { type: String },
-         Description : { type: String },
-         Rating : { type: String },
-         pricePerDay : { type: String }*/
-    });
+
     var chatSchema = new mongoose.Schema({
         username: { type: String }
         , message: String
     });
+   var hotelSchema = new mongoose.Schema({
+       Name: String
+       //, Location: {type: String}
+   });
+       /*,
+         Address: { type: String },
+         Description : { type: String },
+         Rating : { type: String },
+         pricePerDay : { type: String }
+    });
+
 
 
 
@@ -40,12 +44,12 @@ db.once('open', function() {
         Contact : String,
         Menu : String
     });
-
+*/
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
     hotelList = mongoose.model('hotel', hotelSchema);
-    restaurantsList = mongoose.model('Restaurant', restaurantSchema);
+    //restaurantsList = mongoose.model('Restaurant', restaurantSchema);
 
 });
 
@@ -77,11 +81,19 @@ app.use('/feedback', require('./controllers/feedback.controller'));
 app.use('/contact', require('./controllers/contact.controller'));
 app.use('/event_view', require('./controllers/event_view.controller'));
 app.use('/event_view1', require('./controllers/event_view1.controller'));
-
+//var Hotels = require('./models/hotels');
 
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
+});
+
+// make '/app' default route
+app.get('/hotels', function (req, res) {
+    hotelList.find(function (err, hotels) {
+        if (err) return console.error(err);
+        console.log(hotels);
+    });
 });
 
 // start server
@@ -98,7 +110,7 @@ var fisrtTimeConnection = true;
 var listOfOnlinePeople = [];
 io.on('connection', function(socket){
     //console.log("nsd : " +socket.id);
-    var data = [];
+    /*var data = [];
     socket.on('Get Data', function(placename){
         console.log(placename);
         hotelList.find(function (err, hotel) {
@@ -116,7 +128,7 @@ io.on('connection', function(socket){
 
 
 
-    });
+    });*/
     socket.on('chat message', function(data){
         io.emit('chat message', data);
         var chat = new chatMessage({

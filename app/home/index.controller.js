@@ -4,10 +4,10 @@
     angular
         .module('app')
         .controller('Home.IndexController', Controller);
-    function Controller(UserService,ChatService,$scope) {
+    function Controller(UserService,HotelService,$scope) {
         var vm = this;
         vm.user = null;
-        vm.takePlaceName = takePlaceName;
+        //vm.takePlaceName = takePlaceName;
         var socket =  io();
         initController();
         function initController() {
@@ -15,9 +15,12 @@
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
             });
+            HotelService.GetHotels().then(function (data) {
+                console.log(data)
+            });
         }
 
-        function takePlaceName(){
+       /* function takePlaceName(){
             //console.log($('#placename').val());
             //socket.emit("Get Data",$('#placename').val());
 			socket.emit("Get Data",{});
@@ -25,7 +28,7 @@
 
         socket.on('Send Database Information', function(data) {
             console.log(data);
-        });
+        });*/
 
 
 
