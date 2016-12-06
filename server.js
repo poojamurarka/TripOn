@@ -10,18 +10,41 @@ var config = require('config.json');
 
 var mongoose = require('mongoose');
 var chatMessage;
+var hotelList;
+var restaurantsList;
 var db = mongoose.connection;
 
 db.on('error', console.error);
 db.once('open', function() {
+
     var chatSchema = new mongoose.Schema({
         username: { type: String }
         , message: String
     });
+   var hotelSchema = new mongoose.Schema({
+       Name: String,
+       Location: {type: String},
+        Address: { type: String },
+        Description : { type: String },
+        Rating : { type: String },
+        pricePerDay : { type: String }
+   });
+    var restaurantSchema = new mongoose.Schema({
+        Name : String,
+        Location : String,
+        Address: String,
+        Description : String,
+        Timings : String,
+        Contact : String,
+        Menu : String
+    });
 
-// Compile a 'Movie' model using the movieSchema as the structure.
-// Mongoose also creates a MongoDB collection called 'Movies' for these documents.
+// Compile a 'chat' model using the chatSchema as the structure.
+// Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
+    hotelList = mongoose.model('hotels', hotelSchema);
+    restaurantsList = mongoose.model('Restaurant', restaurantSchema);
+
 });
 
 mongoose.connect('mongodb://localhost:27017/TripOn');
@@ -48,13 +71,47 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/forgetPassword', require('./controllers/forgetPassword.controller'));
 app.use('/home', require('./controllers/home.controller'));
+app.use('/feedback', require('./controllers/feedback.controller'));
+app.use('/contact', require('./controllers/contact.controller'));
 app.use('/event_view', require('./controllers/event_view.controller'));
 app.use('/event_view1', require('./controllers/event_view1.controller'));
+//var Hotels = require('./models/hotels');
 
 // make '/app' default route
 app.get('/', function (req, res) {
     return res.redirect('/app');
 });
+
+// make '/app' default route
+app.get('/hotels', function (req, res) {
+    hotelList.find()
+        .then(function (hotels) {
+            if (hotels) {
+                res.send(hotels);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+                res.status(400).send(err);
+        });
+
+});
+
+app.post('/hotels', function (req, res) {
+    var hotel = new hotelList({
+        Name:  req.Name,
+        Location: req.Location,
+        Address: req.Address,
+        Description : req.Description,
+        Rating : req.Rating,
+        pricePerDay : req.pricePerDay
+    });
+    hotel.save(function(err, thor) {
+        if (err) return console.error(err);
+    });
+});
+
 
 // start server
 /*var server = app.listen(3000, function () {
@@ -69,7 +126,6 @@ var server = http.listen(3000, function(){
 var fisrtTimeConnection = true;
 var listOfOnlinePeople = [];
 io.on('connection', function(socket){
-    //console.log("nsd : " +socket.id);
     socket.on('chat message', function(data){
         io.emit('chat message', data);
         var chat = new chatMessage({
@@ -90,7 +146,7 @@ io.on('connection', function(socket){
     });
 
     socket.on("typing", function(data) {
-            io.emit("isTyping", data);
+        io.emit("isTyping", data);
     });
     socket.on("disconnect", function() {
         socket.leave(socket.room);
@@ -107,9 +163,9 @@ io.on('connection', function(socket){
     socket.on("joinserver", function(data) {
         //console.log('disconnect');
         console.log(socket.id + " : "+data.uname);
-       // if(!data.isVisited) {
-            listOfOnlinePeople.push({"socketId": socket.id, "username": data.uname});
-       // }
+        // if(!data.isVisited) {
+        listOfOnlinePeople.push({"socketId": socket.id, "username": data.uname});
+        // }
         io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
     });
 
