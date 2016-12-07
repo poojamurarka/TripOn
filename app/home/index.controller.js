@@ -15,7 +15,8 @@
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
             });
-            HotelService.GetHotels().then(function (data) {
+            var address = "24114";
+            HotelService.GetHotels(address).then(function (data) {
                 vm.listOfHotels = data;
                 console.log(vm.listOfHotels);
             });
