@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Restaurants</title>
+</head>
+
+<body>
+<div class="form-container">
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location"class="form-control"  required />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" class="form-control" cols="40" rows="10"  />
+        </div>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="timings">Timings</label>
+            <input type="text" id="timings" name="timings" class="form-control" cols="30" rows="5" required />
+        </div>
+        <div class="form-group">
+            <label for="contact">Contact</label>
+            <input type="text" id="contact" name="contact" class="form-control" cols="20" rows="5" required />
+        </div>
+       <!-- <div>
+        <h4>Upload on file select</h4>
+        <button ngf-select="vm.uploadFiles($files, $invalidFiles)" multiple
+                accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+            Select Files</button>
+        <br><br>
+        Files:
+        <ul>
+            <li ng-repeat="f in files" >{{f.name}} {{f.$errorParam}}
+                <span class="progress" ng-show="f.progress >= 0">
+        <div
+             ng-bind="f.progress + '%'"></div>
+      </span>
+            </li>
+            <li ng-repeat="f in errFiles">{{f.name}} {{f.$error}} {{f.$errorParam}}
+            </li>
+        </ul>
+        </div>-->
+        <div class="form-group">
+            <input type="submit" id="submit" name="Submit" ng-click="vm.saveRestaurant();" class="form-control"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

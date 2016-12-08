@@ -11,7 +11,8 @@ var config = require('config.json');
 var mongoose = require('mongoose');
 var chatMessage;
 var hotelList;
-var restaurantsList;
+var restaurant;
+var event;
 var db = mongoose.connection;
 
 db.on('error', console.error);
@@ -29,21 +30,29 @@ db.once('open', function() {
         Rating : { type: String },
         pricePerDay : { type: String }
    });
-    var restaurantSchema = new mongoose.Schema({
-        Name : String,
-        Location : String,
-        Address: String,
-        Description : String,
-        Timings : String,
-        Contact : String,
-        Menu : String
+     var restaurantSchema = new mongoose.Schema({
+        Name: String,
+        Location: String,
+        Address:  String,
+        Description: String,
+        Timings: String,
+        Contact: String
     });
+    var eventSchema = new mongoose.Schema({
+        Name: String,
+        Location: String,
+        Venue:  String,
+        Description: String,
+        Timings: String
+    });
+
 
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
     chatMessage = mongoose.model('chat', chatSchema);
-    hotelList = mongoose.model('hotels', hotelSchema);
-    restaurantsList = mongoose.model('Restaurant', restaurantSchema);
+    hotelList = mongoose.model('hotels', hotelSchema); 
+    restaurant = mongoose.model('restaurants', restaurantSchema);
+    event = mongoose.model('events', eventSchema);
 
 });
 
@@ -112,6 +121,67 @@ app.post('/hotels', function (req, res) {
     });
 });
 
+app.get('/Events', function (req, res) {
+    event.find()
+        .then(function (events) {
+            if (events) {
+                res.send(events);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
+app.post('/Events', function (req, res) {
+    console.log(req);
+    var eventObj = new event({
+        Name: req.body.name,
+        Location: req.body.location,
+        Venue:  req.body.venue,
+        Description: req.body.description,
+        Timings: req.body.timings
+    });
+    eventObj.save(function(err) {
+        if (err) return console.error(err);
+        console.log('Event Successfully added');
+
+    });
+});
+app.get('/Restaurants', function (req, res) {
+    restaurant.find()
+        .then(function (restaurants) {
+            if (restaurants) {
+                res.send(restaurants);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
+app.post('/Restaurants', function (req, res) {
+    console.log(req);
+    var restaurantObj = new restaurant({
+        Name: req.body.name,
+        Location: req.body.location,
+        Address:  req.body.address,
+        Description: req.body.description,
+        Timings: req.body.timings,
+        Contact: req.body.contact
+    });
+    restaurantObj.save(function(err) {
+        if (err) return console.error(err);
+        console.log('restauarant created');
+
+    });
+});
 
 // start server
 /*var server = app.listen(3000, function () {
