@@ -13,8 +13,8 @@
 
         return service;
 
-        function GetHotels() {
-            return $http.get('/hotels').then(handleSuccess, handleError);
+        function GetHotels(address) {
+            return $http.get('/hotels/'+address).then(handleSuccess, handleError);
         }
 
         function CreateHotel(hotel) {

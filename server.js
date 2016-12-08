@@ -83,8 +83,8 @@ app.get('/', function (req, res) {
 });
 
 // make '/app' default route
-app.get('/hotels', function (req, res) {
-    hotelList.find()
+app.get('/hotels/:address', function (req, res) {
+    hotelList.find( { $or: [ { "Address": { "$regex": req.params.address, "$options": "i" } },{ "Location": { "$regex": req.params.address, "$options": "i" } }]})
         .then(function (hotels) {
             if (hotels) {
                 res.send(hotels);
@@ -100,12 +100,12 @@ app.get('/hotels', function (req, res) {
 
 app.post('/hotels', function (req, res) {
     var hotel = new hotelList({
-        Name:  req.Name,
-        Location: req.Location,
-        Address: req.Address,
-        Description : req.Description,
-        Rating : req.Rating,
-        pricePerDay : req.pricePerDay
+        Name:  req.body.Name,
+        Location: req.body.Location,
+        Address: req.body.Address,
+        Description : req.body.Description,
+        Rating : req.body.Rating,
+        pricePerDay : req.body.pricePerDay
     });
     hotel.save(function(err, thor) {
         if (err) return console.error(err);
