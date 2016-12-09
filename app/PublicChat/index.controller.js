@@ -73,9 +73,9 @@
                 if(data.username != vm.user.username){
                     $('#TripOn_CL').append('<div id="TripOn_Typing" class="chat_breakword" ' +
                         'style="line-height:normal;color:black;visibility:visible;">'+data.username+
-                        '<img src="https://www.snapengage.com/img/typing.gif" alt="[...]" width="24" height="8">'+
+                        ' is typing...'+
                         '</div>');
-                    scrollToBottomChat();
+                    //scrollToBottomChat();
                 }
             } else {
                 $('#TripOn_CL #TripOn_Typing').remove();
@@ -87,31 +87,37 @@
             $('#TripOn_CL').empty();
             vm.allChat = data;
             var username = null;
-            $('#TripOn_CL').append(' <div style="height:7px;"></div>'+
-                '<div class="chat_breakword" style="line-height:normal;color:black;">' +
-                'Hi'+ vm.user.username +'!!.<br></div>');
+            var className = "";
+            $('#welcomeMsg').append('<div class="name">' +
+                'Hi '+ vm.user.username +' !!. Welcome to chat</div>');
             for(var i in data){
                 username = data[i].username;
+                className = "self";
                 if(username == vm.user.username){
                     username = 'Me';
+                    className = "other";
                 }
-                $('#TripOn_CL').append('<div class="chat_breakword" style="clear:left;line-height:normal;color:black;">' +
-                    '<span style="color:#000000;font-weight:bold;">' + username
-                    +' : </span>'+ data[i].message+' </div>'
-                    +'<div style="height:7px;"></div>');
+                username = username + " :";
+                $('#TripOn_CL').append(' <li class='+className+'>'+
+                    '<div class="msg">'+
+                    '<p>'+username+'</p>'+
+                '<p>'+data[i].message+'</p> </div> </li>');
             }
-            scrollToBottomChat();
+           // scrollToBottomChat();
         });
         socket.on('chat message', function(data){
             // insertChat(data.name,data.msg);
             var username = data.name;
+            var className = "other";
             if(username == vm.user.username){
                 username = 'Me';
+                className = "self"
             }
-            $('#TripOn_CL').append('<div class="chat_breakword" style="clear:left;line-height:normal;color:black;">' +
-                '<span style="color:#000000;font-weight:bold;">' + username
-                +' : </span>'+ data.msg+' </div>'
-                +'<div style="height:7px;"></div>');
+
+            $('#TripOn_CL').append(' <li class='+className+'>'+
+                '<div class="msg">'+
+                '<p>'+username+'</p>'+
+                '<p>'+data[i].message+'</p> </div> </li>');
 
             scrollToBottomChat();
         });
