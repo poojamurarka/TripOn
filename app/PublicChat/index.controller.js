@@ -117,7 +117,7 @@
             $('#TripOn_CL').append(' <li class='+className+'>'+
                 '<div class="msg">'+
                 '<p>'+username+'</p>'+
-                '<p>'+data[i].message+'</p> </div> </li>');
+                '<p>'+data.msg+'</p> </div> </li>');
 
             scrollToBottomChat();
         });
