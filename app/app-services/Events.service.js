@@ -11,11 +11,18 @@
 
     function Service($http, $q) {
         var service = {};
-
-        //service.SaveChat = SaveChat;
+        service.GetAllEvents =  GetAllEvents;
+        service.GetEvents =  GetEvents;
         service.SaveEvent =  SaveEvent;
         return service;
 
+        function GetAllEvents() {
+            return $http.get('/Events').then(handleSuccess, handleError);
+        }
+
+        function GetEvents(address) {
+            return $http.get('/Events/'+address).then(handleSuccess, handleError);
+        }
 
         function SaveEvent(data) {
             return $http.post('/Events', data).then(handleSuccess, handleError);

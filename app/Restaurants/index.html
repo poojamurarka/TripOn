@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<style>
+   #successRes{
+       top: 550px;
+       padding : 5px;
+   }
+</style>
 <html lang="en">
 
 <head>
@@ -8,7 +14,13 @@
 </head>
 
 <body>
-<div class="form-container">
+<div id="successRes">
+    <div class="form-group">
+        <label for="name">Record created successfully for Restaurants!!</label>
+        <button id="createRes" class="btn btn-primary" ng-click="vm.createRestaurants()">Create Restaurant</button>
+    </div>
+</div>
+<div class="form-container" id="addRestaurants">
     <form method="post">
         <div class="form-group">
             <label for="name">Name</label>

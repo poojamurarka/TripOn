@@ -8,11 +8,12 @@
         var vm = this;
         vm.user = null;
         vm.saveRestaurant = saveRestaurant;
+        vm.createRestaurants = createRestaurants;
         //vm.uploadFiles=uploadFiles;
         //vm.files;
         //vm.errFiles;
         initController();
-
+        $('#successRes').css("visibility", "hidden");
         function initController() {
             // get current user
            /* UserService.GetCurrent().then(function (user) {
@@ -53,10 +54,29 @@
             resObj.contact=  $('#contact').val();
             if(resObj.name && resObj.location && resObj.address && resObj.description &&
                 resObj.timings && resObj.contact){
-                RestaurantsService.SaveRestaurant(resObj);
+                RestaurantsService.SaveRestaurant(resObj).then(function (data) {
+                    console.log(data);
+                    if(data == "success"){
+                        $('#successRes').css("visibility", "visible");
+                        $('#addRestaurants').css("visibility", "hidden");
+                    }else{
+                        alert("Some error occured while adding Restaurant!!!");
+                    }
+                });
             }else {
                 alert("Please enter all details");
             }
+        }
+
+        function createRestaurants(){
+            $('#successRes').css("visibility", "hidden");
+            $('#addRestaurants').css("visibility", "visible");
+            $('#name').val('');
+            $('#location').val('');
+            $('#description').val('');
+            $('#address').val('');
+            $('#timings').val('');
+            $('#contact').val('');
         }
     }
 

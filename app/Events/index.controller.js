@@ -11,9 +11,10 @@
         var vm = this;
         vm.user = null;
         vm.saveEvent = saveEvent;
+        vm.createEvent = createEvent;
         //  vm.uploadFiles=uploadFiles;
         initController();
-
+        $('#successEvent').css("visibility", "hidden");
         function initController() {
             // get current user
             /* UserService.GetCurrent().then(function (user) {
@@ -32,10 +33,27 @@
             resObj.timings=  $('#timings').val();
             if(resObj.name && resObj.location && resObj.venue && resObj.description &&
                 resObj.timings){
-                EventsService.SaveEvent(resObj);
+                EventsService.SaveEvent(resObj).then(function (data) {
+                    console.log(data);
+                    if(data == "success"){
+                        $('#successEvent').css("visibility", "visible");
+                        $('#addEvent').css("visibility", "hidden");
+                    }else{
+                        alert("Some error occured while adding Events!!!");
+                    }
+                });
             }else {
                 alert("Please enter all details");
             }
+        }
+        function createEvent(){
+            $('#successEvent').css("visibility", "hidden");
+            $('#addEvent').css("visibility", "visible");
+            $('#name').val('');
+            $('#location').val('');
+            $('#venue').val('');
+            $('#description').val('');
+            $('#timings').val('');
         }
     }
 

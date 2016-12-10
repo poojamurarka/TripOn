@@ -92,6 +92,21 @@ app.get('/', function (req, res) {
 });
 
 // make '/app' default route
+app.get('/hotels', function (req, res) {
+    hotelList.find()
+        .then(function (hotels) {
+            if (hotels) {
+                res.send(hotels);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
 app.get('/hotels/:address', function (req, res) {
     hotelList.find( { $or: [ { "Address": { "$regex": req.params.address, "$options": "i" } },{ "Location": { "$regex": req.params.address, "$options": "i" } }]})
         .then(function (hotels) {
@@ -117,12 +132,32 @@ app.post('/hotels', function (req, res) {
         pricePerDay : req.body.pricePerDay
     });
     hotel.save(function(err, thor) {
-        if (err) return console.error(err);
+        if (err){
+            return res.send("error");
+        }else{
+            console.log('hotel created');
+            return res.send("success");
+        }
     });
 });
 
 app.get('/Events', function (req, res) {
     event.find()
+        .then(function (events) {
+            if (events) {
+                res.send(events);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
+app.get('/Events/:address', function (req, res) {
+    event.find({ "Location": { "$regex": req.params.address, "$options": "i" }})
         .then(function (events) {
             if (events) {
                 res.send(events);
@@ -146,13 +181,32 @@ app.post('/Events', function (req, res) {
         Timings: req.body.timings
     });
     eventObj.save(function(err) {
-        if (err) return console.error(err);
-        console.log('Event Successfully added');
+        if (err){
+            return res.send("error");
+        }else{
+            console.log('events created');
+            return res.send("success");
+        }
 
     });
 });
 app.get('/Restaurants', function (req, res) {
     restaurant.find()
+        .then(function (restaurants) {
+            if (restaurants) {
+                res.send(restaurants);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
+app.get('/Restaurants/:address', function (req, res) {
+    restaurant.find( { $or: [ { "Address": { "$regex": req.params.address, "$options": "i" } },{ "Location": { "$regex": req.params.address, "$options": "i" } }]})
         .then(function (restaurants) {
             if (restaurants) {
                 res.send(restaurants);
@@ -177,8 +231,14 @@ app.post('/Restaurants', function (req, res) {
         Contact: req.body.contact
     });
     restaurantObj.save(function(err) {
-        if (err) return console.error(err);
-        console.log('restauarant created');
+        if (err){
+            return res.send("error");
+        }else{
+            console.log('restauarant created');
+            return res.send("success");
+        }
+
+
 
     });
 });

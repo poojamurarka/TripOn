@@ -1,11 +1,23 @@
 <!DOCTYPE html>
+<style>
+    #successEvent{
+        top: 550px;
+        padding : 5px;
+    }
+</style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Events</title>
 </head>
 <body>
-<div class="form-container">
+<div id="successEvent">
+    <div class="form-group">
+        <label for="name">Record created successfully for Events!!</label>
+        <button id="createEvent" class="btn btn-primary" ng-click="vm.createEvent()">Create Event</button>
+    </div>
+</div>
+<div class="form-container" id="addEvent">
     <form method="post">
         <div class="form-group">
             <label for="name">Name</label>
