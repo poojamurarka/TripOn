@@ -95,7 +95,8 @@ function create(userParam) {
 
         // add hashed password to user object
         user.hash = bcrypt.hashSync(userParam.password, 10);
-
+        user.isAdmin = "false";
+        console.log(user);
         db.users.insert(
             user,
             function (err, doc) {

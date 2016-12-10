@@ -331,7 +331,7 @@
 <form class="col-xs-12" ng-submit="vm.sendMessage();" autocomplete="off">
     <div id="welcomeMsg" class="menu">
     </div>
-    <ol class="chat" id="TripOn_CL">
+    <ol class="chat" id="TripOn_CL" style="height: 500px;position: relative;overflow-x: auto;">
     </ol>
     <input id="TripOn_CE" ng-model="TripOn_CE" ng-change="vm.updateTyping();"  type="text"  placeholder="Send Message" class="textarea"/><div class="emojis"></div>
 </form>

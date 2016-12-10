@@ -92,10 +92,10 @@
                 'Hi '+ vm.user.username +' !!. Welcome to chat</div>');
             for(var i in data){
                 username = data[i].username;
-                className = "self";
+                className = "other";
                 if(username == vm.user.username){
                     username = 'Me';
-                    className = "other";
+                    className = "self";
                 }
                 username = username + " :";
                 $('#TripOn_CL').append(' <li class='+className+'>'+
@@ -111,7 +111,7 @@
             var className = "other";
             if(username == vm.user.username){
                 username = 'Me';
-                className = "self"
+                className = "self";
             }
 
             $('#TripOn_CL').append(' <li class='+className+'>'+
