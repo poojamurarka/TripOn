@@ -1,0 +1,95 @@
+#carbonForm{
+    /* The main form container */
+    background-color:#1C1C1C;
+    border:1px solid #080808;
+    margin:20px auto;
+    padding:20px;
+    width:500px;
+
+    -moz-box-shadow:0 0 1px #444 inset;
+    -webkit-box-shadow:0 0 1px #444 inset;
+    box-shadow:0 0 1px #444 inset;
+}
+
+.fieldContainer{
+    /* The light rounded section, which contans the fields */
+    background-color:#1E1E1E;
+    border:1px solid #0E0E0E;
+    padding:30px 10px;
+
+    /* CSS3 box shadow, used as an inner glow */
+    -moz-box-shadow:0 0 20px #292929 inset;
+    -webkit-box-shadow:0 0 20px #292929 inset;
+    box-shadow:0 0 20px #292929 inset;
+}
+
+#carbonForm,.fieldContainer,.errorTip{
+    /* Rounding the divs at once */
+    -moz-border-radius:12px;
+    -webkit-border-radius:12px;
+    border-radius:12px;
+}
+
+.formRow{
+    height:35px;
+    padding:10px;
+    position:relative;
+}
+
+.label{
+    float:left;
+    padding:0 20px 0 0;
+    text-align:right;
+    width:70px;
+}
+
+label{
+    font-family:Century Gothic,Myriad Pro,Arial,Helvetica,sans-serif;
+    font-size:11px;
+    letter-spacing:1px;
+    line-height:35px; /* Neat line height trick */
+}
+
+.field{
+    float:left;
+}
+
+.field input{
+    /* The text boxes */
+    border:1px solid white;
+    color:#666666;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:22px;
+    padding:4px 5px;
+    background:url("img/box_bg.png") repeat-x scroll left top #FFFFFF;
+    outline:none;
+}
+
+#submit{
+    /* The submit button */
+    border:1px solid #f4f4f4;
+    cursor:pointer;
+    height:40px;
+    text-indent:-9999px;
+    text-transform:uppercase;
+    width:110px;
+
+    background:url("img/submit.png") no-repeat center center #d0ecfd;
+
+    -moz-border-radius:6px;
+    -webkit-border-radius:6px;
+    border-radius:6px;
+}
+
+#submit.active{
+    /* Marking the submit button as active adds the preloader gif as background */
+    background-image:url("img/preloader.gif");
+}
+
+input:hover,
+input:focus{
+    /* CSS3 glow effect */
+    -moz-box-shadow:0 0 8px lightblue;
+    -webkit-box-shadow:0 0 8px lightblue;
+    box-shadow:0 0 8px lightblue;
+}
