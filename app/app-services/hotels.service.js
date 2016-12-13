@@ -7,17 +7,21 @@
 
     function Service($http, $q) {
         var service = {};
-
+        service.GetAllHotels = GetAllHotels;
         service.GetHotels = GetHotels;
-        service.CreateHotel = CreateHotel;
+        service.SaveHotel = SaveHotel;
 
         return service;
+
+        function GetAllHotels() {
+            return $http.get('/hotels').then(handleSuccess, handleError);
+        }
 
         function GetHotels(address) {
             return $http.get('/hotels/'+address).then(handleSuccess, handleError);
         }
 
-        function CreateHotel(hotel) {
+        function SaveHotel(hotel) {
             return $http.post('/hotels', hotel).then(handleSuccess, handleError);
         }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<style>
+    #successEvent{
+        top: 550px;
+        padding : 5px;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<body>
+<div id="successEvent">
+    <div class="form-group">
+        <label for="name">Record created successfully for Events!!</label>
+        <button id="createEvent" class="btn btn-primary" ng-click="vm.createEvent()">Create Event</button>
+    </div>
+</div>
+<div class="form-container" id="addEvent">
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location"class="form-control"  required />
+        </div>
+        <div class="form-group">
+            <label for="venue">Venue</label>
+            <input type="text" name="venue" id="venue" class="form-control" cols="40" rows="10"  />
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="timings">Timings</label>
+            <input type="text" id="timings" name="timings" class="form-control" cols="30" rows="5" required />
+        </div>
+                <div class="form-group">
+            <input type="submit" id="submit" name="Submit" ng-click="vm.saveEvent();" class="form-control"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
