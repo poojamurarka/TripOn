@@ -20,9 +20,9 @@
                 vm.user = user;
             });
             var address = "24114";
-            if(address!="" && address != undefined) {
-                getAllData(address);
-            }
+            //alert(address);
+            getCurrentLOcation();
+
         }
 
         function getData(){
@@ -65,6 +65,21 @@
                     vm.listOfEvents = [];
                     $('.events').css("visibility", "hidden");
                 }
+            });
+        }
+
+        function getCurrentLOcation(){
+            $(document).ready(function() {
+                $.get("http://ipinfo.io", function (response) {
+                    $("#placename").val(response.region +","+response.postal);
+                   // return response.postal;
+                    var address = response.region +" "+response.postal;
+                    console.log(address);
+                    if(response.postal!="" && response.postal != undefined) {
+                        getAllData(response.postal);
+                    }
+                }, "jsonp")
+
             });
         }
 
