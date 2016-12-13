@@ -30,7 +30,7 @@
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #8e9699;
+    background: #5050FF;
     width: 100%;
     border: 0;
     padding: 15px;
@@ -89,11 +89,11 @@
     color: #EF3B3A;
 }
 body {
-    background: #8e9699; /* fallback for old browsers */
-    background: -webkit-linear-gradient(right, #8e9699, #8e9699);
-    background: -moz-linear-gradient(right, #8e9699, #8e9699);
-    background: -o-linear-gradient(right, #8e9699, #8e9699);
-    background: linear-gradient(to left, #8e9699, #8e9699);
+    background: #5050FF; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #5050FF, #5050FF);
+    background: -moz-linear-gradient(right, #5050FF, #5050FF);
+    background: -o-linear-gradient(right, #5050FF, #5050FF);
+    background: linear-gradient(to left, #5050FF, #5050FF);
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
