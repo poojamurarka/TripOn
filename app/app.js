@@ -32,14 +32,6 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'PublicChat' }
             })
- 	.state('Hotels', {
-                url: '/Hotels',
-                templateUrl: 'Hotels/index.html',
-                controller: 'Hotel.IndexController',
-                controllerAs: 'vm',
-                data: {activeTab: 'Hotels'}
-            })
-
 			.state('Restaurants', {
                 url: '/Restaurants',
                 templateUrl: 'Restaurants/index.html',
@@ -60,6 +52,20 @@
                 controller: 'Chat.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'chat' }
+            })
+			.state('Feedbacks', {
+                url: '/Feedbacks',
+                templateUrl: 'Feedbacks/index.html',
+                controller: 'Feedback.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'Feedbacks' }
+            })
+            .state('viewFeedbacks', {
+                url: '/viewFeedbacks',
+                templateUrl: 'viewFeedbacks/index.html',
+                controller: 'ViewFeedback.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'viewFeedbacks' }
             })
             .state('logout', {
                 controller: 'Logout.IndexController',
