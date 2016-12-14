@@ -1,111 +1,88 @@
-/**
- * Created by jyoti on 13/12/2016.
- */
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app')
-        .controller('Hotels.IndexController', Controller);
-    function Controller(UserService,HotelsService,$scope) {
+        .controller('Home.IndexController', Controller);
+    function Controller(UserService,HotelService,EventsService,RestaurantsService,$scope) {
         var vm = this;
         vm.user = null;
-        vm.saveHotels = saveHotels;
-        vm.createHotels = createHotels;
-        //  vm.uploadFiles=uploadFiles;
+        vm.getData = getData;
+        vm.listOfHotels = [];
+        vm.listOfRestaurants = [];
+        vm.listOfEvents = [];
+        var socket =  io();
         initController();
-        $('#successHotels').css("visibility", "hidden");
+        $('#noRes').css("visibility", "hidden");
         function initController() {
             // get current user
-            /* UserService.GetCurrent().then(function (user) {
-             vm.user = user;
-             });*/
+            UserService.GetCurrent().then(function (user) {
+                vm.user = user;
+            });
+            var address = "24114";
+            //alert(address);
+            getCurrentLOcation();
+
         }
 
-
-
-        function saveHotels(){
-            var resObj = {};
-            resObj.name =  $('#name').val();
-            resObj.location=  $('#location').val();
-            resObj.address =  $('#address').val();
-            resObj.description=  $('#description').val();
-            resObj.rating=  $('#rating').val();
-            resObj.pricePerDay=  $('#pricePerDay').val();
-
-            if(resObj.name && resObj.location && resObj.address && resObj.description && resObj.rating &&
-                resObj.pricePerDay ){
-                HotelsService.SaveHotels(resObj).then(function (data) {
-                    console.log(data);
-                    if(data == "success"){
-                        $('#successHotels').css("visibility", "visible");
-                        $('#addHotels').css("visibility", "hidden");
-                    }else{
-                        alert("Some error occured while adding Hotels!!!");
-                    }
-                });
-            }else {
-                alert("Please enter all details");
+        function getData(){
+            var address = $('#placename').val();
+            if(address!="" && address != undefined) {
+                getAllData(address);
             }
         }
-        function createHotels(){
-            $('#successHotels').css("visibility", "hidden");
-            $('#addHotels').css("visibility", "visible");
-            $('#name').val('');
-            $('#location').val('');
-            $('#address').val('');
-            $('#description').val('');
-            $('#rating').val('');
-            $('#pricePerDay').val('');
+
+        function getAllData(address){
+            $('#noRes').css("visibility", "visible");
+            HotelService.GetHotels(address).then(function (data) {
+                if(data && data.length > 0){
+                    $('#noRes').css("visibility", "hidden");
+                    vm.listOfHotels = data;
+                    $('.Hotels').css("visibility", "visible");
+                }else{
+                    vm.listOfHotels = [];
+                    $('.Hotels').css("visibility", "hidden");
+                }
+                console.log(vm.listOfHotels);
+            });
+            RestaurantsService.GetRestaurants(address).then(function (data) {
+                console.log(vm.listOfRestaurants);
+                if(data && data.length > 0){
+                    $('#noRes').css("visibility", "hidden");
+                    vm.listOfRestaurants = data;
+                    $('.restaurants').css("visibility", "visible");
+                }else{
+                    vm.listOfRestaurants = [];
+                    $('.restaurants').css("visibility", "hidden");
+                }
+            });
+            EventsService.GetEvents(address).then(function (data) {
+                if(data && data.length > 0){
+                    $('#noRes').css("visibility", "hidden");
+                    vm.listOfEvents = data;
+                    $('.events').css("visibility", "visible");
+                }else{
+                    vm.listOfEvents = [];
+                    $('.events').css("visibility", "hidden");
+                }
+            });
         }
+
+        function getCurrentLOcation(){
+            $(document).ready(function() {
+                $.get("http://ipinfo.io", function (response) {
+                    $("#placename").val(response.region +","+response.postal);
+                   // return response.postal;
+                    var address = response.region +" "+response.postal;
+                    console.log(address);
+                    if(response.postal!="" && response.postal != undefined) {
+                        getAllData(response.postal);
+                    }
+                }, "jsonp")
+
+            });
+        }
+
     }
 
-
-    /*app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-     $scope.uploadFiles = function(files, errFiles) {
-     $scope.files = files;
-     $scope.errFiles = errFiles;
-     angular.forEach(files, function(file) {
-     file.upload = Upload.upload({
-     url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-     data: {file: file}
-     });
-
-     file.upload.then(function (response) {
-     $timeout(function () {
-     file.result = response.data;
-     });
-     }, function (response) {
-     if (response.status > 0)
-     $scope.errorMsg = response.status + ': ' + response.data;
-     }, function (evt) {
-     file.progress = Math.min(100, parseInt(100.0 *
-     evt.loaded / evt.total));
-     });
-     });
-     }
-     }]);
-     */
-    /*    app.controller('MainController', function($scope, $upload) {
-
-     $scope.uploadFile = function(){
-
-     $scope.fileSelected = function(files) {
-     if (files && files.length) {
-     $scope.file = files[0];
-     }
-
-     $upload.upload({
-     url: './public/images/',
-     file: $scope.file
-     })
-     .success(function(data) {
-     console.log(data, 'uploaded');
-     });
-
-     };
-     };
-     });
-
-     */
 })();
