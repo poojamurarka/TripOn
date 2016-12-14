@@ -63,12 +63,15 @@
                     <span class='entypo-instagrem'></span>
                 </a>
             </div>
-            <form>
+            <form action="/contact" method="post">
                 <p>Get in Contact</p>
-                <input placeholder='Email' type='email'>
-                <input placeholder='Subject' type='text'>
-                <textarea placeholder='Message' rows='4'></textarea>
+
+                <input placeholder='Email' type='email' name="Email">
+                <input placeholder='Subject' type='text' name="Subject">
+                <textarea placeholder='Message' rows='4' name="Message"></textarea>
                 <input placeholder='Send' type='submit'>
+
+                <label> <%= Message %></label>
             </form>
             <p>other way</p>
             <p class='other entypo-mail'>
