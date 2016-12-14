@@ -3,13 +3,13 @@ var router = express.Router();
 var request = require('request');
 var config = require('config.json');
 
+
+
+
 router.get('/', function (req, res) {
-    res.render('contact');
+    console.log('loading');
+    res.render('contact',{Message: ' '});
 });
 
-
-router.get('/contact', function (req, res) {
-    res.render('contact');
-});
 module.exports = router;
 
