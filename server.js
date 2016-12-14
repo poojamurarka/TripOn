@@ -13,6 +13,8 @@ var chatMessage;
 var hotelList;
 var restaurant;
 var event;
+var ContactForm;
+var FeedbackForm;
 var db = mongoose.connection;
 
 db.on('error', console.error);
@@ -45,7 +47,19 @@ db.once('open', function() {
         Description: String,
         Timings: String
     });
+    var ContactSchema = new mongoose.Schema({
+        Email : String,
+        Subject : String,
+        Message: String
 
+    });
+    var FeedbackSchema = new mongoose.Schema({
+        name : String,
+        email : String,
+        phone: String,
+        feedback: String
+
+    });
 
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
@@ -53,7 +67,8 @@ db.once('open', function() {
     hotelList = mongoose.model('hotels', hotelSchema); 
     restaurant = mongoose.model('restaurants', restaurantSchema);
     event = mongoose.model('events', eventSchema);
-
+    ContactForm = mongoose.model('contact', ContactSchema);
+    FeedbackForm = mongoose.model('feedback', FeedbackSchema);
 });
 
 mongoose.connect('mongodb://localhost:27017/TripOn');
@@ -329,5 +344,65 @@ io.on('connection', function(socket){
             "toUser": data.toUser
         });
     });
+
+});
+
+///////////////////////////////////////////////save contact form///////////////////////////////////////////////////
+
+
+app.post('/contact', function (req, res) {
+    console.log('testing2');
+    var email = req.param('Email');
+    console.log('guestname: ' + email);
+    var subject = req.param('Subject');
+    console.log('title: ' + subject);
+    var msg = req.param('Message');
+    console.log('desciption: ' + msg);
+
+//save db
+    var contact = new ContactForm({
+        Email : email,
+        Subject :subject,
+        Message: msg
+
+
+
+    });
+    contact.save(function(err, thor) {
+        if (err) return console.error(err);
+
+        res.render('contact',{Message:'Thank you for contacting us...!'});
+
+    });
+
+
+});
+///////////////////////////////////////////////save contact form///////////////////////////////////////////////////
+
+app.post('/feedback', function (req, res) {
+
+    var name = req.param('name');
+    console.log('guestname: ' + name);
+    var email = req.param('email');
+    console.log('title: ' + email);
+    var phone = req.param('phone');
+    console.log('desciption: ' + phone);
+    var message = req.param('message');
+    console.log('desciption: ' + message);
+
+//save db
+    var feedback = new FeedbackForm({
+        name : name,
+        email :email,
+        phone: phone,
+        feedback:message
+    });
+    feedback.save(function(err, thor) {
+        if (err) return console.error(err);
+
+        res.render('feedback',{Message:'Thank you for giving us feedback...!'});
+
+    });
+
 
 });
