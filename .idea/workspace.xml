@@ -28,8 +28,8 @@
       <file leaf-file-name="home.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/home.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
+            <state relative-caret-position="17">
+              <caret line="102" column="47" lean-forward="true" selection-start-line="102" selection-start-column="47" selection-end-line="102" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -482,7 +482,7 @@
       <workItem from="1481344884309" duration="521000" />
       <workItem from="1481636203741" duration="472000" />
       <workItem from="1481739648888" duration="428000" />
-      <workItem from="1481750200711" duration="758000" />
+      <workItem from="1481750200711" duration="959000" />
     </task>
     <task id="LOCAL-00001" summary="Added&#10;&#10;1.contact page modified">
       <created>1481055272559</created>
@@ -509,10 +509,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172032000" />
+    <option name="totallyTimeSpent" value="172233000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1372" height="735" extended-state="1" />
+    <frame x="-7" y="0" width="1372" height="735" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1994003" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -561,11 +561,6 @@
           <url>file://$PROJECT_DIR$/app/account/index.controller.js</url>
           <line>24</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/controllers/api/chat.controller.js</url>
-          <line>23</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -898,8 +893,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/home.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="30" column="51" lean-forward="false" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
+        <state relative-caret-position="17">
+          <caret line="102" column="47" lean-forward="true" selection-start-line="102" selection-start-column="47" selection-end-line="102" selection-end-column="47" />
           <folding />
         </state>
       </provider>
