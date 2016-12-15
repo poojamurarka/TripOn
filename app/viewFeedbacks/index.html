@@ -1,0 +1,27 @@
+<html>
+<body>
+<head>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <div class="feedbacks">
+        <h3 class="MainHeader">Feedbacks</h3>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Feedback</th>
+            </tr>
+            <div >
+            <tr ng-repeat="feedback in vm.listFeedbacks">
+                <td>{{feedback.Name}}</td>
+                <td>{{feedback.Email}}</td>
+                <td> {{feedback.Phone}}</td>
+                <td>{{feedback.message}}</td>
+            </tr>
+            </div>
+        </table>
+        </div>
+</head>
+</body>
+</html>

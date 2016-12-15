@@ -53,6 +53,20 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'chat' }
             })
+			.state('Feedbacks', {
+                url: '/Feedbacks',
+                templateUrl: 'Feedbacks/index.html',
+                controller: 'Feedback.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'Feedbacks' }
+            })
+            .state('viewFeedbacks', {
+                url: '/viewFeedbacks',
+                templateUrl: 'viewFeedbacks/index.html',
+                controller: 'ViewFeedback.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'viewFeedbacks' }
+            })
             .state('logout', {
                 controller: 'Logout.IndexController',
                 controllerAs: 'vm',

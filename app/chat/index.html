@@ -5,12 +5,26 @@
         text-color: red;
         text-decoration: underline;
 }
+ .ul1{
+     list-style: none;
+     font-size: 18px;
+     margin-left: 20px;
+     margin-top: 7px;
+ }
+.div1{
+    padding: 4px;
+    border: 2px solid #ddd;
+    width: 20%;
+    padding: 2px;
+    margin-top: 10px;
+}
 </style>
 <h3>Private Chat</h3>
     <button  ng-click="vm.getListOfOnlineUsers();"> Get List Of Online Users</button>
-    <div id="onlinePeople" ng-repeat="user in vm.listOfOnlineUsers">
+    <div id="onlinePeople" class="div1" ng-repeat="user in vm.listOfOnlineUsers">
+        <ul class="ul1">
         <li class="li1" style="text-decoration: none;padding:5px;" ng-click="vm.createRoom(user.username)" >
-            {{user.username}}</li>
+            {{user.username}}</li></ul>
     </div>
 <form  ng-submit="vm.sendMessage();" autocomplete="off">
     <div id="TripOn1_WP" style="visibility: hidden; position: fixed; display: block; z-index: 2147483645; overflow: hidden; margin: 0px; padding: 0px; border-collapse: collapse; border-spacing: 0px; border: none; list-style: none; outline: none; width: 438px; height: 448px; right: 0px; top: 0px;" class="">
