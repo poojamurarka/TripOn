@@ -1,23 +1,39 @@
+<style>
+    .btnRemove{
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+    .td1{
+        padding: 10px;
+    }
+    .th1{
+        padding: 10px;
+    }
+</style>
 <html>
 <body>
 <head>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="/css/style.css" rel='stylesheet' type='text/css' />
-    <div class="feedbacks">
+    <div class="feedbacks" style="margin-top:50px;">
         <h3 class="MainHeader">Feedbacks</h3>
-        <table border="1">
+        <table  style="margin-top:9px;" border="1">
             <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Feedback</th>
+                <th class="th1">Username</th>
+                <th class="th1">Email</th>
+                <th class="th1">Phone Number</th>
+                <th class="th1">Feedback</th>
+                <th class="th1">Remove</th>
             </tr>
             <div >
             <tr ng-repeat="feedback in vm.listFeedbacks">
-                <td>{{feedback.Name}}</td>
-                <td>{{feedback.Email}}</td>
-                <td> {{feedback.Phone}}</td>
-                <td>{{feedback.message}}</td>
+                <td class="td1">{{feedback.Name}}</td>
+                <td class="td1">{{feedback.Email}}</td>
+                <td class="td1"> {{feedback.Phone}}</td>
+                <td class="td1">{{feedback.message}}</td>
+                <td id="_id" style="display:none;">{{feedback._id}}</td>
+                <td class="td1"><button id= {{feedback._id}} ng-click="vm.deleteFeedback();" class="btnRemove" value="Delete">Delete</button></td>
             </tr>
             </div>
         </table>

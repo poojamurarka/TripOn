@@ -13,6 +13,7 @@
 
         service.GetAllFeedbacks =  GetAllFeedbacks;
         service.SaveFeedback =  SaveFeedback;
+		service.DeleteFeedback = DeleteFeedback;
         return service;
 
         function GetAllFeedbacks() {
@@ -22,6 +23,10 @@
             return $http.post('/Feedbacks', data).then(handleSuccess, handleError);
 
         }
+		function DeleteFeedback(id) {
+            return $http.post('/viewFeedbacks/'+id).then(handleSuccess, handleError);
+        }
+		
         function handleSuccess(res) {
             return res.data;
         }

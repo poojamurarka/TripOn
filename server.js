@@ -200,6 +200,18 @@ app.get('/viewFeedbacks', function (req, res) {
 
 });
 
+app.post('/viewFeedbacks/:id', function (req, res) {
+
+    feedback.remove({_id : req.params.id}, function(err) {
+        if (!err) {
+            res.send("success");
+        }
+        else {
+            res.send("error");
+        }
+    });
+
+});
 
 app.post('/Feedbacks', function (req, res) {
     var feedback1 = new feedback({
