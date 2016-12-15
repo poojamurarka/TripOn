@@ -1,0 +1,25 @@
+<html>
+<body>
+<head>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <div class="query">
+        <h3 class="MainHeader">Customer queries</h3>
+        <table border="1">
+            <tr>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+            </tr>
+            <div >
+            <tr ng-repeat="listOfQuery in vm.listOfQueries">
+                <td>{{listOfQuery.Email}}</td>
+                <td>{{listOfQuery.Subject}}</td>
+                <td> {{listOfQuery.Message}}</td>
+            </tr>
+            </div>
+        </table>
+        </div>
+</head>
+</body>
+</html>
