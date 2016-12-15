@@ -16,7 +16,7 @@
         return service;
 
         function GetAllFeedbacks() {
-            return $http.get('/Feedbacks').then(handleSuccess, handleError);
+            return $http.get('/viewFeedbacks').then(handleSuccess, handleError);
         }
         function SaveFeedback(data) {
             return $http.post('/Feedbacks', data).then(handleSuccess, handleError);
