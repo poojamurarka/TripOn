@@ -67,6 +67,13 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'viewFeedbacks' }
             })
+	    .state('viewQueries', {
+		url: '/viewQueries',    
+		templateUrl: 'viewQueries/index.html',
+                controller: 'ViewQueries.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'viewQueries' }
+            })
             .state('logout', {
                 controller: 'Logout.IndexController',
                 controllerAs: 'vm',
