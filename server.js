@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
 var chatMessage;
 var hotelList;
 var restaurant;
+var feedback;
 var event;
 var ContactForm;
 var FeedbackForm;
@@ -32,6 +33,12 @@ db.once('open', function() {
         Rating : { type: String },
         Price : { type: String }
    });
+    var feedbackSchema = new mongoose.Schema({
+        Name: String,
+        Email: {type: String},
+        Phone: { type: String },
+        message: { type: String }
+    });
      var restaurantSchema = new mongoose.Schema({
         Name: String,
         Location: String,
@@ -53,13 +60,7 @@ db.once('open', function() {
         Message: String
 
     });
-    var FeedbackSchema = new mongoose.Schema({
-        name : String,
-        email : String,
-        phone: String,
-        feedback: String
 
-    });
 
 // Compile a 'chat' model using the chatSchema as the structure.
 // Mongoose also creates a MongoDB collection called 'chat' for these documents.
@@ -68,7 +69,7 @@ db.once('open', function() {
     restaurant = mongoose.model('restaurants', restaurantSchema);
     event = mongoose.model('events', eventSchema);
     ContactForm = mongoose.model('contact', ContactSchema);
-    FeedbackForm = mongoose.model('feedback', FeedbackSchema);
+    feedback = mongoose.model('feedbacks',feedbackSchema);
 });
 
 mongoose.connect('mongodb://localhost:27017/TripOn');
@@ -169,6 +170,40 @@ app.get('/Events', function (req, res) {
         });
 
 });
+
+app.get('/viewFeedbacks', function (req, res) {
+    feedback.find()
+        .then(function (feedbacks) {
+            if (feedbacks) {
+                res.send(feedbacks);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
+
+
+app.post('/Feedbacks', function (req, res) {
+    var feedback1 = new feedback({
+        Name:  req.body.name,
+        Email: req.body.email,
+        Phone: req.body.phone,
+        message: req.body.message
+    });
+    feedback1.save(function(err, thor) {
+        if (err){
+            return res.send("error");
+        }else{
+            console.log('Feedback added');
+            return res.send("success");
+        }
+    });
+});
+
 
 app.get('/Events/:address', function (req, res) {
     event.find({ "Location": { "$regex": req.params.address, "$options": "i" }})
