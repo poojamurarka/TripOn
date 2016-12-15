@@ -26,17 +26,8 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
-                /* if(!isVisited) {
-                 socket.emit("joinserver",{"uname" : vm.user.username});
-                 isVisited = true;
-                 }
-                 */                socket.emit('get All Chat', {});
+                socket.emit('get All Chat', {});
             });
-
-
-            /*  ChatService.GetAllChat().then(function (data) {
-             console.log(data)
-             });*/
         }
 
 
