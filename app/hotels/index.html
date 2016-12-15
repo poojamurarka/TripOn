@@ -1,50 +1,69 @@
 <!DOCTYPE html>
+
 <style>
-    #successHotels{
-        top: 550px;
-        padding : 5px;
+    #successHot{
+        top:600px;
+        padding: 6px;
     }
-</style>
+    </style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hotels</title>
 </head>
 <body>
-<div id="successHotels">
+<div id="successHot">
     <div class="form-group">
         <label for="name">Record created successfully for Hotels!!</label>
-        <button id="createHotels" class="btn btn-primary" ng-click="vm.createHotels()">Create Hotels</button>
+        <button id="createHot" class="btn btn-primary" ng-click="vm.createHotels()">Create Hotel</button>
     </div>
-</div>
+  </div>
 <div class="form-container" id="addHotels">
     <form method="post">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" required />
+            <input type="text" name="name" id="name" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="location">Location</label>
-            <input type="text" name="location" id="location"class="form-control"  required />
+            <input type="text" name="location" id="location" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <input type="text" id="address" name="address" class="form-control" required />
+            <input type="text" name="address" id="address" class="form-control" required/>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" class="form-control" required />
+            <input type="text" name="description" id="description" class="form-control" cols="50" rows="10" />
         </div>
         <div class="form-group">
             <label for="rating">Rating</label>
-            <input type="text" id="rating" name="rating" class="form-control" required />
+            <input type="text" name="rating" id="rating" class="form-control" required />
         </div>
         <div class="form-group">
-            <label for="pricePerDay">PricePerDay</label>
-            <input type="text" id="pricePerDay" name="pricePerDay" class="form-control" cols="30" rows="5" required />
+            <label for="price">Price</label>
+            <input type="text" name="price" id="price" class="form-control" required />
         </div>
+        <!--<div>
+        <h4>Upload on file select</h4>
+        <button ngf-select="vm.uploadFiles($files, $invalidFiles)" multiple
+             accept="image/*"ngf-max-height="1000" ngf-max-size="1MB">
+             Select Files</button><br><br>
+             Files:
+             <ul>
+                <li ng-repeat="f in files"  > {{f.name}} {{f.$errorParam}}
+                   <span class="progress" ng-show="f.progress >= 0">
+          <div
+                   ng-bind=" f.progress + '%'"</div>
+
+              </span>
+              </li>
+              <li ng-repeat="f in errFiles">{{f.name}} {{f.$error}} {{f.$errorParam}}
+              </li>
+              </ul>
+              </div>--->
         <div class="form-group">
-            <input type="submit" id="submit" name="Submit" ng-click="vm.saveHotels();" class="form-control"/>
+            <input type="submit" id="submit" name="Submit" ng-click="vm.saveHotel();" class="form-control" />
         </div>
     </form>
 </div>

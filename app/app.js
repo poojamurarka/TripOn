@@ -32,6 +32,14 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'PublicChat' }
             })
+ 	.state('Hotels', {
+                url: '/Hotels',
+                templateUrl: 'Hotels/index.html',
+                controller: 'Hotel.IndexController',
+                controllerAs: 'vm',
+                data: {activeTab: 'Hotels'}
+            })
+
 			.state('Restaurants', {
                 url: '/Restaurants',
                 templateUrl: 'Restaurants/index.html',

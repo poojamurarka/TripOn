@@ -30,7 +30,7 @@ db.once('open', function() {
         Address: { type: String },
         Description : { type: String },
         Rating : { type: String },
-        pricePerDay : { type: String }
+        Price : { type: String }
    });
      var restaurantSchema = new mongoose.Schema({
         Name: String,
