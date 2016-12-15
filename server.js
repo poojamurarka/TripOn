@@ -95,7 +95,6 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/forgetPassword', require('./controllers/forgetPassword.controller'));
 app.use('/home', require('./controllers/home.controller'));
-app.use('/feedback', require('./controllers/feedback.controller'));
 app.use('/contact', require('./controllers/contact.controller'));
 app.use('/event_view', require('./controllers/event_view.controller'));
 app.use('/event_view1', require('./controllers/event_view1.controller'));
