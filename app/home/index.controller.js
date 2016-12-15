@@ -4,7 +4,7 @@
     angular
         .module('app')
         .controller('Home.IndexController', Controller);
-    function Controller(UserService,HotelService,EventsService,RestaurantsService,$scope) {
+    function Controller(UserService,HotelService,EventsService,RestaurantsService,$scope,$rootScope) {
         var vm = this;
         vm.user = null;
         vm.getData = getData;
@@ -18,6 +18,11 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+                $rootScope.isAdmin = false;
+                if(user.isAdmin == "true"){
+                    $rootScope.isAdmin = true;
+                }
+                console.log(user);
             });
             var address = "24114";
             //alert(address);
