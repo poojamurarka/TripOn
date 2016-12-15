@@ -107,6 +107,20 @@ app.get('/', function (req, res) {
 });
 
 // make '/app' default route
+app.get('/getQueries', function (req, res) {
+    ContactForm.find()
+        .then(function (data) {
+            if (data) {
+                res.send(data);
+            } else {
+                res.sendStatus(404);
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+
+});
 app.get('/hotels', function (req, res) {
     hotelList.find()
         .then(function (hotels) {
