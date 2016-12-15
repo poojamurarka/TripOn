@@ -28,11 +28,11 @@
         <ul class="nav nav-tabs">
             <li ng-class="{active: activeTab === 'home'}"><a ui-sref="home">Home</a></li>
             <li ng-class="{active: activeTab === 'PublicChat'}"><a ui-sref="PublicChat">Public Chat</a></li>
-            <li ng-class="{active: activeTab === 'chat'}"><a ui-sref="chat">Private chat</a></li>
-            <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Setting</a></li>
-			<li ng-class="{active: activeTab === 'Restaurants'}"><a ui-sref="Restaurants">Add Restaurants</a></li>
-            <li ng-class="{active: activeTab === 'Events'}"><a ui-sref="Events">Add Events</a></li>
-            <li ng-class="{active: activeTab === 'Hotel'}"><a ui-sref="Hotel">Add Hotels</a></li>
+            <li ng-class="{active: activeTab === 'chat'}" ng-show="!isAdmin"><a ui-sref="chat">Private chat</a></li>
+            <li ng-class="{active: activeTab === 'account'}" ng-show="!isAdmin"><a ui-sref="account">Setting</a></li>
+            <li ng-class="{active: activeTab === 'Hotel'}" ng-show="isAdmin"><a ui-sref="Hotel">Add Hotel</a></li>
+            <li ng-class="{active: activeTab === 'Restaurants'}" ng-show="isAdmin"><a ui-sref="Restaurants">Add Restaurants</a></li>
+            <li ng-class="{active: activeTab === 'Events'}" ng-show="isAdmin"><a ui-sref="Events">Add Events</a></li>
             <li ng-class="{active: activeTab === 'logout'}"><a href="/login" target="_self">Logout</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
