@@ -30,9 +30,9 @@
             <li ng-class="{active: activeTab === 'PublicChat'}"><a ui-sref="PublicChat">Public Chat</a></li>
             <li ng-class="{active: activeTab === 'chat'}"><a ui-sref="chat">Private chat</a></li>
             <li ng-class="{active: activeTab === 'account'}"><a ui-sref="account">Setting</a></li>
-            <li ng-class="{active: activeTab ==='Hotels'}"><a ui-sref="Hotels">Add Hotels</a></li>
 			<li ng-class="{active: activeTab === 'Restaurants'}"><a ui-sref="Restaurants">Add Restaurants</a></li>
             <li ng-class="{active: activeTab === 'Events'}"><a ui-sref="Events">Add Events</a></li>
+            <li ng-class="{active: activeTab === 'Hotel'}"><a ui-sref="Hotel">Add Hotels</a></li>
             <li ng-class="{active: activeTab === 'logout'}"><a href="/login" target="_self">Logout</a></li>
         </ul>
         <div class="flash-message" ng-if="flash">
@@ -63,7 +63,7 @@
     <script src="app-services/hotels.service.js"></script>
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
-    <script scr="Hotels/index.controller.js"></script>
+    <script scr="Hotel/index.controller.js"></script>
 	<script src="Restaurants/index.controller.js"></script>
     <script src="Events/index.controller.js"></script>
     <script src="PublicChat/index.controller.js"></script>
