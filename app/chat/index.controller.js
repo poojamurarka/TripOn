@@ -39,15 +39,6 @@
             for(var i in lstOfOnline){
                 if(vm.user.username != lstOfOnline[i].username) {
                     vm.listOfOnlineUsers.push(lstOfOnline[i]);
-                    /*$('#onlinePeople').append('<button type="submit" id='+lstOfOnline[i].username+' ng-click="vm.createRoom('+lstOfOnline[i].username+')" >' +
-                        lstOfOnline[i].username.toUpperCase() +
-                        '</button>');
-
-                    $('#onlinePeople').append('<div class="btn-minimize" ng-click="vm.createRoom()"  title="Close">hello</div>');
-                    /*$('#onlinePeople').append('<div onclick="vm.createRoom('+lstOfOnline[i].username+')" >'+
-                        lstOfOnline[i].username.toUpperCase() +
-                    '</div>');
-                    console.log(i + "   usersonline " + lstOfOnline[i].username);*/
 
                 }
             }
