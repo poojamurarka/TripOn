@@ -7,6 +7,13 @@
 
 
     <link rel="stylesheet" href="/css/contact.css">
+<style>
+    #contentinfo {
+        color: #000;
+    }
+</style>
+
+
 
 
 </head>
@@ -86,3 +93,48 @@
 
 </body>
 </html>
+<script>
+
+    // This example displays a marker at the center of Australia.
+    // When the user clicks the marker, an info window opens.
+
+    function initMap() {
+        var uluru = {lat: 54.33, lng: 10.18};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru
+        });
+
+        var contentString = '<div id="contentinfo">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">TRIP_ON</h1>'+
+            '<div id="bodyContent">'+
+            '<p>trip_on@gmail.com</p>'+
+            '<p>+49 17626888730</p>'+
+            '<p>Will get back to u</p>'+
+            '</div>'+
+            '</div>';
+
+
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            title: 'Uluru (Ayers Rock)'
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+
+
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsA8_2zkB6oK0AY9PoVE5YoGxPQgwzpFc&callback=initMap">
+</script>
