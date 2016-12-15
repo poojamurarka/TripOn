@@ -46,6 +46,13 @@
                 controllerAs: 'vm',
                 data: { activeTab: 'Events' }
             })
+            .state('Hotel', {
+                url: '/Hotel',
+                templateUrl: 'Hotel/index.html',
+                controller: 'Hotel.IndexController',
+                controllerAs: 'vm',
+                data: { activeTab: 'Hotel' }
+            })
             .state('chat', {
                 url: '/chat',
                 templateUrl: 'chat/index.html',
