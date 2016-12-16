@@ -43,15 +43,22 @@
                 if(data && data.length > 0){
                     $('#noRes').css("visibility", "hidden");
                     for(var j=0; j<data.length ; j++){
+                        if(j < 14) {
+                            data[j].image = "images/Hotels/img" + j+'.jpg';
+                        }else{
+                            data[j].image = "images/Hotels/Atlantic.jpg";
+                        }
                         if(data[j].Description && data[j].Description.length > 19) {
                             data[j].Description = data[j].Description.substring(0, 20) + "...";
                         }
+
+
                     }
                     vm.listOfHotels = data;
-                    $('.Hotels').css("visibility", "visible");
+                    $('.hotel').css("visibility", "visible");
                 }else{
                     vm.listOfHotels = [];
-                    $('.Hotels').css("visibility", "hidden");
+                    $('.hotel').css("visibility", "hidden");
                 }
                 console.log(vm.listOfHotels);
             });
@@ -60,8 +67,19 @@
                 if(data && data.length > 0){
                     $('#noRes').css("visibility", "hidden");
                     for(var k=0; k<data.length ; k++){
+                        if(k < 14) {
+                            data[k].image = "images/img" + k+'.jpg';
+                        }else{
+                            data[k].image = "images/Hotels/img14.jpg";
+                        }
                         if(data[k].Description && data[k].Description.length > 19) {
                             data[k].Description = data[k].Description.substring(0, 20) + "...";
+                        }
+                        if(data[k].Timings && data[k].Timings.length > 19) {
+                            data[k].Timings = data[k].Timings.substring(0, 19) + "...";
+                        }
+                        if(data[k].Contact && data[k].Contact.length > 19) {
+                            data[k].Contact = data[k].Contact.substring(0, 19) + "...";
                         }
                     }
                     vm.listOfRestaurants = data;

@@ -1,7 +1,7 @@
 ﻿<style>
 	.ul1{
 		list-style: none;
-		font-size: 18px;
+		font-size: 15px;
 	}
 	.div1{
 		padding: 4px;
@@ -27,7 +27,7 @@
     .div1.ng-scope {
         width: 30%;
         float: left;
-		height:410px;
+		height:390px;
         margin-left: 10px;
         margin-bottom: 10px;
     }
@@ -43,7 +43,7 @@
 			<div ng-repeat="restaurant in vm.listOfRestaurants" class="div1">
 				<h4 class="heading">{{restaurant.Name}}</h4>
 				<ul class="ul1">
-                 <li><img src="images/Hotels/Atlantic.jpg" style="width: 250px;"> </li>
+                 <li><img src={{restaurant.image}} style="width: 250px;"> </li>
 				<li>Location: {{restaurant.Location}}</li>
 				<li>Address:  {{restaurant.Address}}</li>
 				<li>Description: {{restaurant.Description}}</li>
@@ -57,7 +57,7 @@
 			<div ng-repeat="hotel in vm.listOfHotels" class="div1">
 				<h4 class="heading">{{hotel.Name}}</h4>
 				<ul class="ul1">
-                  <li><img src="images/Hotels/City Partner1.jpg" style="width: 250px;"> </li>
+                  <li><img src={{hotel.image}} style="width: 250px;"> </li>
 				<li>Location: {{hotel.Location}}</li>
 				<li>Address: {{hotel.Address}}</li>
 				<li>Description : {{hotel.Description}}</li>
