@@ -42,6 +42,11 @@
             HotelService.GetHotels(address).then(function (data) {
                 if(data && data.length > 0){
                     $('#noRes').css("visibility", "hidden");
+                    for(var j=0; j<data.length ; j++){
+                        if(data[j].Description && data[j].Description.length > 19) {
+                            data[j].Description = data[j].Description.substring(0, 20) + "...";
+                        }
+                    }
                     vm.listOfHotels = data;
                     $('.Hotels').css("visibility", "visible");
                 }else{
@@ -54,6 +59,11 @@
                 console.log(vm.listOfRestaurants);
                 if(data && data.length > 0){
                     $('#noRes').css("visibility", "hidden");
+                    for(var k=0; k<data.length ; k++){
+                        if(data[k].Description && data[k].Description.length > 19) {
+                            data[k].Description = data[k].Description.substring(0, 20) + "...";
+                        }
+                    }
                     vm.listOfRestaurants = data;
                     $('.restaurants').css("visibility", "visible");
                 }else{
@@ -64,6 +74,11 @@
             EventsService.GetEvents(address).then(function (data) {
                 if(data && data.length > 0){
                     $('#noRes').css("visibility", "hidden");
+                    for(var l=0; l<data.length ; l++){
+                        if(data[l].Description && data[l].Description.length > 19) {
+                            data[l].Description = data[l].Description.substring(0, 20) + "...";
+                        }
+                    }
                     vm.listOfEvents = data;
                     $('.events').css("visibility", "visible");
                 }else{
@@ -76,7 +91,14 @@
         function getCurrentLOcation(){
             $(document).ready(function() {
                 $.get("http://ipinfo.io", function (response) {
-                    $("#placename").val(response.region +","+response.postal);
+                    var address = "";
+                    if(response.region){
+                        address = response.region;
+                    }
+                    if(response.postal){
+                        address = address +','+ response.postal;
+                    }
+                    $("#placename").val(address);
                    // return response.postal;
                     var address = response.region +" "+response.postal;
                     console.log(address);
