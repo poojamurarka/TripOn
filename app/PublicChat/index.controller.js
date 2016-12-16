@@ -6,7 +6,7 @@
         .controller('PublicChat.IndexController', Controller);
     var isVisited = false;
     var typing = false;
-    function Controller(UserService,ChatService,$scope) {
+    function Controller(UserService,$scope) {
         var vm = this;
         vm.showChat = false;
         vm.allChat = null;
