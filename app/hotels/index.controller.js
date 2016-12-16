@@ -5,11 +5,11 @@
     'use strict';
     angular
         .module('app')
-        .controller('Hotel.IndexController',Controller);
-    function Controller(UserService, HotelService,$scope) {
+        .controller('hotelcont',Controller);
+    function Controller(HotelService,$scope) {
         var vm = this;
         vm.user = null;
-        vm.saveHotel = saveHotel;
+        vm.saveHotels = saveHotels;
         vm.createHotels = createHotels;
         initController();
         $('#successHot').css("visibility", "hidden");
@@ -41,7 +41,7 @@
          });
          }
       */
-         function saveHotel() {
+         function saveHotels() {
              var resObj = {};
              resObj.name = $('#name').val();
              resObj.location = $('#location').val();
@@ -50,7 +50,7 @@
              resObj.rating = $('#rating').val();
              resObj.price = $('#price').val();
              if (resObj.name && resObj.location && resObj.address && resObj.description && resObj.rating && resObj.price) {
-                 HotelService.saveHotel(resObj).then(function (data) {
+                 HotelService.SaveHotels(resObj).then(function (data) {
                      console.log(data);
                      if (data == "success") {
                          $('#successHot').css("visibility", "visible");
@@ -68,7 +68,7 @@
              }
 
              function createHotels() {
-                 $('#successHot').css("visibility", "hidden");
+                 $('#successHotels').css("visibility", "hidden");
                  $('#addHotels').css("visibility", "visible");
                  $('#name').val('');
                  $('#location').val('');

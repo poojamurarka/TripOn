@@ -9,7 +9,7 @@
         var service = {};
         service.GetAllHotels = GetAllHotels;
         service.GetHotels = GetHotels;
-        service.SaveHotel = SaveHotel;
+        service.SaveHotels = SaveHotels;
 
         return service;
 
@@ -21,7 +21,7 @@
             return $http.get('/hotels/'+address).then(handleSuccess, handleError);
         }
 
-        function SaveHotel(hotel) {
+        function SaveHotels(hotel) {
             return $http.post('/hotels', hotel).then(handleSuccess, handleError);
         }
 

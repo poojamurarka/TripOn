@@ -30,7 +30,7 @@
             <li ng-class="{active: activeTab === 'PublicChat'}"><a ui-sref="PublicChat">Public Chat</a></li>
             <li ng-class="{active: activeTab === 'chat'}" ng-show="!isAdmin"><a ui-sref="chat">Private chat</a></li>
             <li ng-class="{active: activeTab === 'account'}" ng-show="!isAdmin"><a ui-sref="account">Setting</a></li>
-            <li ng-class="{active: activeTab === 'addHotel'}" ng-show="isAdmin"><a ui-sref="addHotel">Add Hotel</a></li>
+            <li ng-class="{active: activeTab === 'hotels'}" ng-show="isAdmin"><a ui-sref="hotels">Add Hotel</a></li>
             <li ng-class="{active: activeTab === 'Restaurants'}" ng-show="isAdmin"><a ui-sref="Restaurants">Add Restaurants</a></li>
             <li ng-class="{active: activeTab === 'Events'}" ng-show="isAdmin"><a ui-sref="Events">Add Events</a></li>		
             <li ng-class="{active: activeTab === 'Feedbacks'}" ng-show="!isAdmin"><a ui-sref="Feedbacks">Give Feedback</a></li>
@@ -73,6 +73,7 @@
     <script src="Events/index.controller.js"></script>
     <script src="PublicChat/index.controller.js"></script>
     <script src="viewQueries/index.controller.js"></script>
+	<script src="hotels/index.controller.js"></script>
     <script src="chat/index.controller.js"></script>
 </body>
 </html>
