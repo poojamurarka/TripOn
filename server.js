@@ -121,6 +121,20 @@ app.get('/getQueries', function (req, res) {
         });
 
 });
+
+app.post('/getQueries/:id', function (req, res) {
+
+    ContactForm.remove({_id : req.params.id}, function(err) {
+        if (!err) {
+            res.send("success");
+        }
+        else {
+            res.send("error");
+        }
+    });
+
+});
+
 app.get('/hotels', function (req, res) {
     hotelList.find()
         .then(function (hotels) {
@@ -212,6 +226,8 @@ app.post('/viewFeedbacks/:id', function (req, res) {
     });
 
 });
+
+
 
 app.post('/Feedbacks', function (req, res) {
     var feedback1 = new feedback({

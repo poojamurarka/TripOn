@@ -1,21 +1,37 @@
+<style>
+.td1{
+padding: 10px;
+}
+.th1{
+padding: 10px;
+}
+.btnRemove{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+</style>
 <html>
 <body>
 <head>
     <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="/css/style.css" rel='stylesheet' type='text/css' />
-    <div class="query">
+    <div style="margin-top:50px;" class="query">
         <h3 class="MainHeader">Customer queries</h3>
-        <table border="1">
+        <table style="margin-top:9px;" border="1">
             <tr>
-                <th>Email</th>
-                <th>Subject</th>
-                <th>Message</th>
+                <th class="th1">Email</th>
+                <th class="th1">Subject</th>
+                <th class="th1">Message</th>
+                <th class="th1">Remove</th>
             </tr>
             <div >
             <tr ng-repeat="listOfQuery in vm.listOfQueries">
-                <td>{{listOfQuery.Email}}</td>
-                <td>{{listOfQuery.Subject}}</td>
-                <td> {{listOfQuery.Message}}</td>
+                <td class="td1">{{listOfQuery.Email}}</td>
+                <td class="td1">{{listOfQuery.Subject}}</td>
+                <td class="td1"> {{listOfQuery.Message}}</td>
+                <td id="_id" style="display:none;">{{listOfQuery._id}}</td>
+                <td class="td1"><button id= {{listOfQuery._id}} ng-click="vm.deleteQuery();" class="btnRemove" value="Delete">Delete</button></td
             </tr>
             </div>
         </table>
