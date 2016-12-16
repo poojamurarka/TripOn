@@ -1,6 +1,3 @@
-/**
- * Created by jyoti on 12/12/2016.
- */
 (function () {
     'use strict';
 
@@ -16,6 +13,8 @@
         vm.createFeedbacks = createFeedbacks;
         initController();
         $('#successFeedback').css("visibility", "hidden");
+        $('#successFeedback').css("display", "none");
+
         function initController() {
             // get current user
             UserService.GetCurrent().then(function (user) {
@@ -37,7 +36,9 @@
                     console.log(data);
                     if(data == "success"){
                         $('#successFeedback').css("visibility", "visible");
+                        $('#successFeedback').css("display", "inline");
                         $('.contact').css("visibility", "hidden");
+                        $('.contact').css("display", "none");
                     }else{
                         alert("Some error occured while adding Feedback!!!");
                     }
@@ -49,7 +50,9 @@
 
         function createFeedbacks(){
             $('#successFeedback').css("visibility", "hidden");
+            $('#successFeedback').css("display", "none");
             $('.contact').css("visibility", "visible");
+            $('.contact').css("display", "inline");
             $('#email').val('');
             $('#phone').val('');
             $('#txtFeedback').val('');
