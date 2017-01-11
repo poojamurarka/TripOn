@@ -17,14 +17,14 @@
         return service;
 
         function GetAllFeedbacks() {
-            return $http.get('/viewFeedbacks').then(handleSuccess, handleError);
+            return $http.get('/viewFeedbacks').then(handleSuccess, handleError);           // service function to retrieive all customer Feedbacks
         }
         function SaveFeedback(data) {
-            return $http.post('/Feedbacks', data).then(handleSuccess, handleError);
+            return $http.post('/Feedbacks', data).then(handleSuccess, handleError);        // service function to save  Feedbacks in database
 
         }
 		function DeleteFeedback(id) {
-            return $http.post('/viewFeedbacks/'+id).then(handleSuccess, handleError);
+            return $http.post('/viewFeedbacks/'+id).then(handleSuccess, handleError);      // service function to delete Feedback
         }
 		
         function handleSuccess(res) {

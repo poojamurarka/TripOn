@@ -17,14 +17,14 @@
         return service;
 
         function GetAllRestaurants() {
-            return $http.get('/Restaurants').then(handleSuccess, handleError);
+            return $http.get('/Restaurants').then(handleSuccess, handleError);           // service function to get all Restaurants from dataabse
         }
 
         function GetRestaurants(address) {
-            return $http.get('/Restaurants/'+address).then(handleSuccess, handleError);
+            return $http.get('/Restaurants/'+address).then(handleSuccess, handleError);  // service function for custom search on Restaurants
         }
          function SaveRestaurant(data) {
-             return $http.post('/Restaurants', data).then(handleSuccess, handleError);
+             return $http.post('/Restaurants', data).then(handleSuccess, handleError);   // service function to save Restaurant in database
 
          }
 

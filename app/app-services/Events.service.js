@@ -17,15 +17,15 @@
         return service;
 
         function GetAllEvents() {
-            return $http.get('/Events').then(handleSuccess, handleError);
+            return $http.get('/Events').then(handleSuccess, handleError);              // service function to get all Events
         }
 
         function GetEvents(address) {
-            return $http.get('/Events/'+address).then(handleSuccess, handleError);
+            return $http.get('/Events/'+address).then(handleSuccess, handleError);     // service function for custom search on Events
         }
 
         function SaveEvent(data) {
-            return $http.post('/Events', data).then(handleSuccess, handleError);
+            return $http.post('/Events', data).then(handleSuccess, handleError);        // service function to save Events in database
 
         }
 

@@ -17,7 +17,7 @@
         function initController() {
             // get current user
             UserService.GetCurrent().then(function (user) {
-                vm.user = user;
+                vm.user = user;                                // details of the current logged in user
             });
         }
 

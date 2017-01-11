@@ -9,7 +9,7 @@
     function config($stateProvider, $urlRouterProvider) {
         // default route
         $urlRouterProvider.otherwise("/");
-
+                                                        //  different template URL so as to identify the controller with a particular url.
         $stateProvider
             .state('home', {
                 url: '/',

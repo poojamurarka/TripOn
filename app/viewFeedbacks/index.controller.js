@@ -15,8 +15,8 @@
         $('#successFeedback').css("visibility", "hidden");
         function initController() {
             // get current user
-            FeedbacksService.GetAllFeedbacks().then(function (listOfFeedback) {
-                console.log(listOfFeedback);
+            FeedbacksService.GetAllFeedbacks().then(function (listOfFeedback) {          // displaying all current feedbacks through Feedback
+                console.log(listOfFeedback);                                             // service
                 vm.listFeedbacks = listOfFeedback;
                 if(vm.listFeedbacks && vm.listFeedbacks.length > 0){
                     $('.feedbacks').css("visibility", "visible");
@@ -31,7 +31,7 @@
             //alert($(this).("id"));
             //alert(id);
             var id =  $('#_id').text();
-            FeedbacksService.DeleteFeedback(id).then(function (data) {
+            FeedbacksService.DeleteFeedback(id).then(function (data) {                 // deleting a feeback
                 if(data == "success"){
                     var index = -1;
                     var comArr = eval( vm.listFeedbacks );

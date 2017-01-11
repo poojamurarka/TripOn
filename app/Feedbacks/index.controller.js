@@ -19,14 +19,14 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
 
-                vm.user = user;
+                vm.user = user;                                   //  details of the current user as to save individual feedbacks
             });
         }
         function saveFeedback(){
             var feedObj = {};
-            //feedObj.username = vm.user.username;
-            feedObj.name =  vm.user.username;
-            feedObj.email=  $('#email').val();
+            //feedObj.username = vm.user.username;                //  taking  data from logged in user through UI
+            feedObj.name =  vm.user.username;                     //  and  passing it to the Feedback service to post
+            feedObj.email=  $('#email').val();                    //  //  it in database
             feedObj.phone=  $('#phone').val();
             feedObj.message=  $('#txtFeedback').val();
 

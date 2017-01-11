@@ -14,8 +14,8 @@
         initController();
         function initController() {
             // get current user
-            CustomerQueryService.GetAllCustomerQuery().then(function (listOfQueries) {
-                console.log(listOfQueries);
+            CustomerQueryService.GetAllCustomerQuery().then(function (listOfQueries) {                // retrieving all customer quieries
+                console.log(listOfQueries);                                                           // from database through CustomerQueryService
                 vm.listOfQueries = listOfQueries;
                 if(vm.listOfQueries && vm.listOfQueries.length > 0){
                     $('.query').css("visibility", "visible");
@@ -31,7 +31,7 @@
             //alert($(this).("id"));
             //alert(id);
             var id =  $('#_id').text();
-            CustomerQueryService.DeleteQuery(id).then(function (data) {
+            CustomerQueryService.DeleteQuery(id).then(function (data) {             // deleting a query through CustomerQueryService
                 if(data == "success"){
                     var index = -1;
                     var comArr = eval( vm.listOfQueries );

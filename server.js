@@ -20,7 +20,7 @@ var db = mongoose.connection;
 
 db.on('error', console.error);
 db.once('open', function() {
-
+                                                                 // creating different schemas for different tables
     var chatSchema = new mongoose.Schema({
         username: { type: String }
         , message: String
@@ -109,7 +109,7 @@ app.get('/', function (req, res) {
 // make '/app' default route
 app.get('/getQueries', function (req, res) {
     ContactForm.find()
-        .then(function (data) {
+        .then(function (data) {                                     // // retrieving all queries from db
             if (data) {
                 res.send(data);
             } else {
@@ -124,7 +124,7 @@ app.get('/getQueries', function (req, res) {
 
 app.post('/getQueries/:id', function (req, res) {
 
-    ContactForm.remove({_id : req.params.id}, function(err) {
+    ContactForm.remove({_id : req.params.id}, function(err) {                // deleting query through id
         if (!err) {
             res.send("success");
         }
@@ -154,7 +154,7 @@ app.get('/hotels/:address', function (req, res) {
     hotelList.find( { $or: [ { "Address": { "$regex": req.params.address, "$options": "i" } },{ "Location": { "$regex": req.params.address, "$options": "i" } }]})
         .then(function (hotels) {
             if (hotels) {
-                res.send(hotels);
+                res.send(hotels);                                           // retrieving data from db on custom search
             } else {
                 res.sendStatus(404);
             }
@@ -167,14 +167,14 @@ app.get('/hotels/:address', function (req, res) {
 
 app.post('/hotels', function (req, res) {
     var hotel = new hotelList({
-        Name:  req.body.Name,
+        Name:  req.body.Name,                                               //  assigning data to the modeled schema
         Location: req.body.Location,
         Address: req.body.Address,
         Description : req.body.Description,
         Rating : req.body.Rating,
         pricePerDay : req.body.pricePerDay
     });
-    hotel.save(function(err, thor) {
+    hotel.save(function(err, thor) {                                        // saving the hotel data in database
         if (err){
             return res.send("error");
         }else{
@@ -201,7 +201,7 @@ app.get('/Events', function (req, res) {
 
 app.get('/viewFeedbacks', function (req, res) {
     feedback.find()
-        .then(function (feedbacks) {
+        .then(function (feedbacks) {                                           // fetching feedbacks from the db
             if (feedbacks) {
                 res.send(feedbacks);
             } else {
@@ -216,7 +216,7 @@ app.get('/viewFeedbacks', function (req, res) {
 
 app.post('/viewFeedbacks/:id', function (req, res) {
 
-    feedback.remove({_id : req.params.id}, function(err) {
+    feedback.remove({_id : req.params.id}, function(err) {                    // deleting a oarticular feedback
         if (!err) {
             res.send("success");
         }
@@ -231,7 +231,7 @@ app.post('/viewFeedbacks/:id', function (req, res) {
 
 app.post('/Feedbacks', function (req, res) {
     var feedback1 = new feedback({
-        Name:  req.body.name,
+        Name:  req.body.name,                                           // assigning data to the modeled schema
         Email: req.body.email,
         Phone: req.body.phone,
         message: req.body.message
@@ -248,7 +248,7 @@ app.post('/Feedbacks', function (req, res) {
 
 
 app.get('/Events/:address', function (req, res) {
-    event.find({ "Location": { "$regex": req.params.address, "$options": "i" }})
+    event.find({ "Location": { "$regex": req.params.address, "$options": "i" }})   //fetching events by location
         .then(function (events) {
             if (events) {
                 res.send(events);
@@ -265,7 +265,7 @@ app.get('/Events/:address', function (req, res) {
 app.post('/Events', function (req, res) {
     console.log(req);
     var eventObj = new event({
-        Name: req.body.name,
+        Name: req.body.name,                                                         // assigning data to the modeled schema
         Location: req.body.location,
         Venue:  req.body.venue,
         Description: req.body.description,
@@ -315,7 +315,7 @@ app.post('/Restaurants', function (req, res) {
     console.log(req);
     var restaurantObj = new restaurant({
         Name: req.body.name,
-        Location: req.body.location,
+        Location: req.body.location,                                            // assigning data to the modeled schema
         Address:  req.body.address,
         Description: req.body.description,
         Timings: req.body.timings,
@@ -457,7 +457,7 @@ app.post('/contact', function (req, res) {
 
 app.post('/feedback', function (req, res) {
 
-    var name = req.param('name');
+    var name = req.param('name');                                                      // assigning data to the modeled schema
     console.log('guestname: ' + name);
     var email = req.param('email');
     console.log('title: ' + email);

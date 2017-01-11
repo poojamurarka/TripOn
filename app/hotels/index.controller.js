@@ -42,9 +42,9 @@
          }
       */
          function saveHotels() {
-             var resObj = {};
-             resObj.name = $('#name').val();
-             resObj.location = $('#location').val();
+             var resObj = {};                                                 // taking  data from logged in user through UI
+             resObj.name = $('#name').val();                                  // and  passing it to the Hotel service to post
+             resObj.location = $('#location').val();                          //  it in database
              resObj.address = $('#address').val();
              resObj.description = $('#description').val();
              resObj.rating = $('#rating').val();

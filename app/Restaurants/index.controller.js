@@ -46,9 +46,9 @@
 */
         function saveRestaurant(){
             var resObj = {};
-            resObj.name =  $('#name').val();
-            resObj.location=  $('#location').val();
-            resObj.address=  $('#description').val();
+            resObj.name =  $('#name').val();                                             // taking  data from logged in user through UI
+            resObj.location=  $('#location').val();                                      // and  passing it to the Restaurants service to post
+            resObj.address=  $('#description').val();                                    //  it in database
             resObj.description=  $('#address').val();
             resObj.timings=  $('#timings').val();
             resObj.contact=  $('#contact').val();

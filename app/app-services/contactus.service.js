@@ -13,7 +13,7 @@
         return service;
 
         function GetAllCustomerQuery() {
-            return $http.get('/getQueries').then(handleSuccess, handleError);
+            return $http.get('/getQueries').then(handleSuccess, handleError);       // service function to retrieve all customer quieries
         }
         function handleSuccess(res) {
             return res.data;

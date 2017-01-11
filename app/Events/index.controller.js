@@ -24,9 +24,9 @@
 
 
 
-        function saveEvent(){
-            var resObj = {};
-            resObj.name =  $('#name').val();
+        function saveEvent(){                                                             // taking  data from logged in user through UI
+            var resObj = {};                                                              // and  passing it to the Event service to post
+            resObj.name =  $('#name').val();                                              //  it in database
             resObj.location=  $('#location').val();
             resObj.venue=  $('#venue').val();
             resObj.description=  $('#description').val();
