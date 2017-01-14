@@ -32,6 +32,8 @@
         function getListOfOnlineUsers(){
 
         }
+		
+		//This is used to get list of online users
         socket.on('getOnlinePeople', function(data){
             //$('#onlinePeople').empty();
             var lstOfOnline = data.listOfOnlinePeople;
@@ -43,6 +45,8 @@
                 }
             }
         });
+		
+		//This function is used to create room for two users
         function createRoom(user) {
             //vm.visibility = "visible";
             $('#TripOn1_WP').css("visibility", "visible");
@@ -52,6 +56,8 @@
             $('#TripOn1_CL').empty();
 
         }
+		
+		
         function privateChat() {
             var message;
             var convertionId;
@@ -72,6 +78,8 @@
                 +'<div style="height:7px;"></div>');
             scrollToBottomChat();
         });
+		
+		//This is called when user become offline
         socket.on('userOffline', function(data) {
             console.log(data.message);
             $('#TripOn1_CL').append('<div class="chat_breakword" style="clear:left;line-height:normal;color:black;">' +
@@ -87,7 +95,7 @@
             socket.emit('add me in room',data);
         });
 
-
+		//This function is used to send message
         function sendMessage(){
             socket.emit('send private message', {"toUser" : toUser,"room" : roomName,"message" : $('#TripOn1_CE').val(),"name" : vm.user.username});
             $('#TripOn1_CE').val('');

@@ -39,7 +39,7 @@
             }
         }
 
-
+		//function is called for sending message to all users
         function sendMessage(){
             socket.emit('chat message', {msg : $('#TripOn_CE').val(),name : vm.user.username});
             $('#TripOn_CE').val('');
@@ -49,6 +49,8 @@
             return false;
 
         }
+		
+		//function is called for showing isTyping on the screen
         function updateTyping(){
 
             if (!typing) {
@@ -57,7 +59,7 @@
             }
         }
 
-
+		// This is used to broadcast to all user who is typing
         socket.on("isTyping", function(data) {
             console.log("hello.........");
             if (data.isTyping) {
@@ -73,7 +75,7 @@
             }
 
         });
-
+		//This is used to get all previous all chat
         socket.on('get All Chat', function(data){
             $('#TripOn_CL').empty();
             vm.allChat = data;

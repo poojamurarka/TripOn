@@ -347,6 +347,8 @@ var server = http.listen(3000, function(){
 var fisrtTimeConnection = true;
 var listOfOnlinePeople = [];
 io.on('connection', function(socket){
+	
+	//functionality for saving chat in database. Username and message are stored.
     socket.on('chat message', function(data){
         io.emit('chat message', data);
         var chat = new chatMessage({
@@ -359,16 +361,19 @@ io.on('connection', function(socket){
         });
     });
 
+	//functionality for getting all previous chat from database
     socket.on('get All Chat', function(){
         chatMessage.find(function (err, chats) {
             if (err) return console.error(err);
             io.emit('get All Chat', chats);
         });
     });
-
+	//functionality for displaying isTyping on public chat screen
     socket.on("typing", function(data) {
         io.emit("isTyping", data);
     });
+	
+	//when user disconnet or logged out , "disconnect" is called 
     socket.on("disconnect", function() {
         socket.leave(socket.room);
         console.log(socket.id + ' disconnected');
@@ -381,6 +386,7 @@ io.on('connection', function(socket){
             }
         }
     });
+	//This function is called when user login into app
     socket.on("joinserver", function(data) {
         //console.log('disconnect');
         console.log(socket.id + " : "+data.uname);
@@ -389,7 +395,7 @@ io.on('connection', function(socket){
         // }
         io.emit("getOnlinePeople",{"listOfOnlinePeople" : listOfOnlinePeople});
     });
-
+	//This function is called when user join into private chat window.
     socket.on('subscribe', function(data) {
         console.log('joining room', data.roomId);
         socket.room = data.roomId;
@@ -406,11 +412,15 @@ io.on('connection', function(socket){
         }
 
     });
+	
+	//This function is used for private chat 
     socket.on('add me in room', function(data) {
         socket.room = data.roomName;
         console.log("adding toUser");
         socket.join(data.roomName);
     });
+	
+	//This function is used for sending private messages
     socket.on('send private message', function(data) {
         var roomId  = data.room;
         console.log("room found");
